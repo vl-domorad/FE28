@@ -1,0 +1,21 @@
+.button {
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+    background-color: blue;
+}
+
+.primary {
+    background-color: #053a05;
+    color: white;
+}
+
+.secondary {
+    background-color: white;
+    border: 1px solid #999999;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}

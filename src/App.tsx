@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+// @ts-ignore
+import styles from './App.module.css';
+import Button, {ButtonType} from "./Components/Button";
 
-function App() {
+const TABS_NAME = [
+    {
+        key: 'all',
+        title: 'All',
+    },
+    {
+        key: 'primary',
+        title: 'primary',
+    },
+    {
+        key: 'secondary',
+        title: 'secondary',
+    },
+]
+export const App = () => {
+
+    const [isActive, setActive] = useState(true)
+    // let active = true
+    // active = false
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className={styles.app}>
+          {isActive && <Button type={ButtonType.Primary} title={'Primary'} onClick={() => alert('Primary')}/>}
+          <Button type={ButtonType.Secondary} title={'FALSE'} onClick={() => setActive(false)} />
+          <Button type={ButtonType.Error} title={'TRUE'} onClick={() => setActive(true)} />
+          {TABS_NAME.map((tab) => <div key={tab.key}>{tab.title}</div>)}
+      </div>
   );
 }
-
 export default App;
