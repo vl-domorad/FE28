@@ -1,21 +1,30 @@
 .button {
-    width: 200px;
-    height: 100px;
-    margin: 10px;
-    background-color: blue;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
 }
 
 .primary {
-    background-color: #053a05;
-    color: white;
+  background-color: #2231aa;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
 }
 
 .secondary {
-    background-color: white;
-    border: 1px solid #999999;
+  background-color: white;
+  border: 1px solid #999999;
 }
 
 .error {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: gray;
 }

@@ -1,4 +1,41 @@
 .app {
-    background-color: rgba(255, 0, 0, 0.38);
-    height: 300px;
+  width: 100vw;
+  height: 100vh;
 }
+
+.menu {
+  padding: 10px;
+  width: 50px;
+  background-color: yellow;
+  border-radius: 15px;
+}
+
+.searchIcon:hover {
+  cursor: pointer;
+  background-color: #053a05;
+}
+.searchIcon:hover svg > path {
+  stroke: gray;
+}
+
+/*Card styles*/
+.post {
+  display: flex;
+}
+.largePost {
+  max-width: 736px;
+  background-color: red;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.mediumPost {
+  max-width: 352px;
+  background-color: green;
+  flex-direction: column;
+}
+.smallPost {
+  max-width: 354px;
+  flex-direction: row;
+}
+
+/*CardList*/

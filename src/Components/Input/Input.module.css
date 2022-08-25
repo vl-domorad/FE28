@@ -1,0 +1,19 @@
+.input {
+  background: #ffffff;
+  border-radius: 2px;
+  padding: 18px 20px;
+  border: 2px solid transparent;
+  outline: none;
+  color: #313037;
+}
+.input:focus,
+.input:hover {
+  border-color: #dadada;
+}
+.input:disabled {
+  background: #e8e8e8;
+  color: #8d8e97;
+}
+.error {
+  border-color: #fd3419;
+}
