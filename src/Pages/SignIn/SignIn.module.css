@@ -1,0 +1,31 @@
+.label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #313037;
+}
+.formContainer{
+    padding: 40px;
+    border: 1px solid #DADADA;
+    background-color: #F3F3F3;
+    width: 624px;
+    height: 684px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+.signUpButton {
+    margin-top: 8px;
+}

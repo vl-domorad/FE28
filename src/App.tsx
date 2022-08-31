@@ -5,6 +5,7 @@ import Button, { ButtonType } from "./Components/Button";
 import { SearchIcon } from "./Assets/Icons";
 import classNames from "classnames";
 import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/SignIn";
 
 const TABS_NAME = [
   {
@@ -174,7 +175,7 @@ export const App = () => {
   return (
     <div className={styles.app}>
       {/*<Header /> - ДЗ на сегодня было!!!*/}
-      <SignUp />
+      <SignIn />
       {/*<Footer /> - ДЗ будет на вторник!!!*/}
     </div>
   );

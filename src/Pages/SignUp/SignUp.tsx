@@ -1,17 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 
 import Input from "../../Components/Input";
+import Label from "../../Components/Label";
 import Button, { ButtonType } from "../../Components/Button";
 //@ts-ignore
 import styles from "./SignUp.module.css";
-
-type LabelProps = {
-  title: string;
-};
-
-const Label: FC<LabelProps> = ({ title }) => {
-  return <div className={styles.label}>{title}</div>;
-};
 
 const SignUp = () => {
   const [name, setName] = useState("");
