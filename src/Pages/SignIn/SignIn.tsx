@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Input from "../../Components/Input";
 import Label from "../../Components/Label";
@@ -22,6 +22,14 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordTouched, setPasswordTouched] = useState(false);
+
+  const inputRef = useRef<any>();
+
+  useEffect(() => {
+    if (inputRef) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (emailTouched && !validateEmail(email)) {
@@ -51,29 +59,29 @@ const SignIn = () => {
     <div className={styles.container}>
       <div>
         <div>Back to home</div>
-        <div>Sign Up</div>
+        <div>Sign In</div>
       </div>
 
       <div className={styles.formContainer}>
         <div className={styles.inputContainer}>
           <Label title={"Email"} />
-          <Input
+          <input
             value={email}
-            onChange={setEmail}
+            onChange={(event: any) => setEmail(event.target.value)}
             placeholder={"Your email"}
             onBlur={onBlurEmail}
-            error={!!emailError}
           />
           {emailTouched && emailError && <div>{emailError}</div>}
         </div>
         <div className={styles.inputContainer}>
           <Label title={"Password"} />
-          <Input
+          <input
+            ref={inputRef}
             value={password}
-            onChange={setPassword}
+            onChange={(event: any) => setPassword(event.target.value)}
             placeholder={"Your password"}
             onBlur={onBlurPassword}
-            error={!!passwordError}
+            // error={!!passwordError}
           />
           {passwordTouched && passwordError && <div>{passwordError}</div>}
         </div>
