@@ -1,0 +1,92 @@
+/* Card Wrapper */
+
+.cardWrapper {
+  width: 1120px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #dadada;
+  margin-bottom: 40px;
+}
+.cardWrapper:last-child {
+  margin-bottom: 0px;
+}
+/* Img */
+
+.imgWrapper {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  width: 96px;
+  height: 96px;
+  margin-right: 32px;
+}
+.imgWrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Content Wrapper Img & Text*/
+
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 45px;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.date {
+  color: rgba(141, 142, 151, 1);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+.title {
+  color: rgba(49, 48, 55, 1);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+/* Icons */
+
+.iconsWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.iconsThumb :first-child {
+  margin-right: 52px;
+  cursor: pointer;
+}
+.iconsOptions :first-child {
+  margin-right: 25px;
+  cursor: pointer;
+
+}
+
+/* DarkTheme */
+
+.darkContainer {
+  border-bottom: 1px solid #8d8e97;
+}
+
+.darkContainer .date,
+.darkContainer .title {
+  color: #ffffff;
+}
+.darkContainer .iconsThumb :first-child {
+  fill: white;
+}
+.darkContainer .iconsOptions :first-child {
+  fill: white;
+}

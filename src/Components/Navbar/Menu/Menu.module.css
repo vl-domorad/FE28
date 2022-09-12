@@ -1,0 +1,39 @@
+.listMenu{
+    margin: 0;
+    style: none;
+    list-style: none;
+    padding:  0;
+    background: #ffffff;
+    width: 231px;
+    margin-bottom: 30px;
+    border-top: 1px solid rgb(83, 96, 205);
+
+  }
+  
+  .listMenu li{
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 1px solid #dadada;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(49, 48, 55, 1);
+    cursor: pointer;
+    transition: 0.1;
+  
+  }
+  .listMenu li:first-child{
+    border-top: none;
+
+  }
+  .listMenu li:hover{
+    box-shadow: 4px 3px 15px 1px #9c9cee;
+    
+  }
+  .listMenu :first-child{
+    padding: 0;
+  }
+  .listMenu :nth-child(2){
+    color: rgba(34, 49, 170, 1)
+    ;
+  
+  }

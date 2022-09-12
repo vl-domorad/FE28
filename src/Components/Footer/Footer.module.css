@@ -1,0 +1,23 @@
+.footerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footerContent {
+  width: 1120px;
+  padding:  35px 0;
+  border-top: 1px solid rgba(218, 218, 218, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(141, 142, 151, 1);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.darkContainer .footerContent{
+  border-top: 1px solid #8d8e97;
+
+}

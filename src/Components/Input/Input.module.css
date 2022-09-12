@@ -5,6 +5,11 @@
   border: 2px solid transparent;
   outline: none;
   color: #313037;
+  width: 100%;
+  font-size: 16px;
+  font-weight:400;
+
+
 }
 .input:focus,
 .input:hover {

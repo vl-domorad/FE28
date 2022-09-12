@@ -1,0 +1,30 @@
+.user {
+    width: 231px;
+    height: 84px;
+    background-color: rgb(34, 49, 170);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 30px;
+  }
+  .user p {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .user p:before {
+    content: "AM";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: rgb(83, 96, 205);
+    margin-right: 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }

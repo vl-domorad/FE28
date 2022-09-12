@@ -1,5 +1,5 @@
 {
-  "name": "fe28",
+  "name": "fe28react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,8 @@
     "@types/react-dom": "^18.0.6",
     "classnames": "^2.3.1",
     "react": "^18.2.0",
-    "react-burger-menu": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
