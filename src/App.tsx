@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { Provider, useDispatch, useSelector } from "react-redux";
+
 // @ts-ignore
 import styles from "./App.module.css";
 import ThemeProvider from "./Context/ThemeContext/Provider";
-import { Theme } from "./Context/ThemeContext/Context";
 import Router from "./Pages/Router";
+import store from "./Redux/store";
+import { changeTheme } from "./Redux/reducers/themeReducer";
+import ThemeSelectors from "./Redux/selectors/themeSelectors";
 
-function App() {
-  const [theme, setTheme] = useState(Theme.Light);
+const App = () => {
+  const theme = useSelector(ThemeSelectors.getTheme);
+  const dispatch = useDispatch();
+
   const onChangeTheme = () => {
-    const themeValue = theme === Theme.Light ? Theme.Dark : Theme.Light;
-    setTheme(themeValue);
+    dispatch(changeTheme());
   };
   return (
     <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
       <Router />
     </ThemeProvider>
   );
-}
+};
 
-export default App;
+const AppWithStore = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+export default AppWithStore;

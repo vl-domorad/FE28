@@ -9,7 +9,7 @@ import {
   CancelIcon,
   SearchIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
 } from "../../Assets/Icons";
 import classNames from "classnames";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
@@ -19,7 +19,7 @@ const Navbar = ({
   input,
   isOpened,
   isDark,
-  changeThemeOnClick
+  changeThemeOnClick,
 }: any) => {
   const { theme, onChangeTheme } = useThemeContext();
 
@@ -34,9 +34,8 @@ const Navbar = ({
           className={classNames(styles.sunIcon)}
           onClick={onChangeTheme}
           // onClick={changeThemeOnClick}
-
         >
-          {theme === Theme.Dark ?  <SunIcon /> : <MoonIcon /> }
+          {theme === Theme.Dark ? <SunIcon /> : <MoonIcon />}
         </div>
         <div
           className={styles.searchIcon}
