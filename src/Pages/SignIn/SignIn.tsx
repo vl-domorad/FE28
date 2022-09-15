@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 //@ts-ignore
 import styles from "./SignIn.module.css";
 import classNames from "classnames";
@@ -8,7 +8,7 @@ import Input from "../../Components/Input";
 import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import {PathNames} from "../Router/Router";
+import { PathNames } from "../../Pages/Router/Router";
 
 const validateEmail = (email: string) => {
   return String(email)

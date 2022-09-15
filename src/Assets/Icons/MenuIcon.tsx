@@ -6,7 +6,7 @@ export const MenuIcon = ({width = '20',height= '20'}) => {
       width={width}
       height={height}
       viewBox="0 0 20 14"
-      fill="none"
+      fill="white"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

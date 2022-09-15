@@ -1,16 +1,16 @@
 import React, { FC, useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
+
 //@ts-ignore
 import styles from "./SignUp.module.css";
 import classNames from "classnames";
-
 
 import Title from "../../Components/Title";
 import Input from "../../Components/Input";
 import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import {PathNames} from "../Router/Router";
-import {NavLink} from "react-router-dom";
+import { PathNames } from "../../Pages/Router/Router";
 
 
 const validateEmail = (email: string) => {
@@ -36,9 +36,7 @@ const SignUp = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
 
-
-  const { theme} = useThemeContext();
-
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (emailTouched && !validateEmail(email)) {
@@ -57,15 +55,16 @@ const SignUp = () => {
   }, [passwordTouched, password]);
 
   useEffect(() => {
-    if (confirmPasswordTouched && confirmPassword.length < 8 && confirmPassword != password) {
-      setConfirmPasswordError("Confirm validation failed. Password does not match");
+    if (confirmPasswordTouched && confirmPassword.length < 8) {
+      setConfirmPasswordError("Enter more than 8 characters");
+    } else if (confirmPasswordTouched && confirmPassword != password) {
+      setConfirmPasswordError(
+        "Confirm validation failed. Password does not match"
+      );
     } else {
       setConfirmPasswordError("");
     }
   }, [confirmPasswordTouched, confirmPassword, password]);
-
-
-
 
   const onBlurEmail = () => {
     setEmailTouched(true);
@@ -76,15 +75,15 @@ const SignUp = () => {
   };
 
   const onBlurConfirmPassword = () => {
-    // confirm password === password
-    // должен быть больше 8 символов
-    setConfirmPasswordTouched(true)
+    setConfirmPasswordTouched(true);
   };
 
   return (
-    <div className={classNames(styles.container, {
-      [styles.darkContainer]: theme === Theme.Dark
-    })} >
+    <div
+      className={classNames(styles.container, {
+        [styles.darkContainer]: theme === Theme.Dark
+      })}
+    >
       <div className={styles.headForm}>
         <div>Back to Home</div>
         <Title title={"Sign Up"} />
@@ -128,7 +127,9 @@ const SignUp = () => {
             value={confirmPassword}
             error={!!confirmPasswordError}
           />
-          {confirmPasswordTouched && confirmPasswordError && <div>{confirmPasswordError}</div>}
+          {confirmPasswordTouched && confirmPasswordError && (
+            <div>{confirmPasswordError}</div>
+          )}
         </div>
         <div>
           <Button
@@ -143,7 +144,7 @@ const SignUp = () => {
         </div>
 
         <div className={styles.haveAccount}>
-          Already have an account? <NavLink to={PathNames.SignIn}>Sign In</NavLink>
+          Already have an account? <Link to={PathNames.SignIn}>Sign In</Link>
         </div>
       </div>
     </div>

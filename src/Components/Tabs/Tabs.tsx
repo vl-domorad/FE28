@@ -9,8 +9,8 @@ import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import {TabsProps} from './types'
 
 const Tabs: FC<TabsProps> = ({ tabs }) => {
-  const targetTabs = (title: string) => {
-      console.log(title);
+  const targetTabs = (evt: MouseEvent<HTMLButtonElement>) => {
+    console.log(evt.target);
   };
   const { theme } = useThemeContext();
 
@@ -24,7 +24,7 @@ const Tabs: FC<TabsProps> = ({ tabs }) => {
         {tabs.map(tab => {
           return (
             <li key={tab.key}>
-              <button onClick={() => targetTabs(tab.title)} disabled={tab.disabled}>
+              <button onClick={targetTabs} disabled={tab.disabled}>
                 {tab.title}
               </button>
             </li>

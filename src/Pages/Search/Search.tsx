@@ -1,5 +1,4 @@
 import React from "react";
-import { classicNameResolver } from "typescript";
 //@ts-ignore
 import styles from "./Search.module.css";
 import classNames from "classnames";
