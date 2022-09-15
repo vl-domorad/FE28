@@ -7,7 +7,6 @@
   max-width: 736px;
   flex-direction: column;
   justify-content: space-between;
- 
 }
 .textImgWrap {
   margin-bottom: 35px;
@@ -40,7 +39,6 @@
   flex-direction: column;
   flex-wrap: wrap;
 }
-
 
 .smallPost {
   max-width: 354px;
@@ -125,8 +123,8 @@
   line-height: 28px;
   cursor: pointer;
 }
-.title:hover{
-  color: #2231AA;
+.title:hover {
+  color: #2231aa;
 }
 .largePost .title {
   font-weight: 700;
@@ -150,17 +148,18 @@
   width: 352px;
 }
 
-
 .largePost .iconsWrapper {
   width: 100%;
 }
 
-.iconsThumb :first-child {
-  margin-right: 52px;
+.iconsThumb {
   cursor: pointer;
+  display: flex;
+  gap: 52px;
 }
-.iconsOptions :first-child {
-  margin-right: 30px;
+.iconsOptions {
+  display: flex;
+  gap: 30px;
   cursor: pointer;
 }
 
@@ -184,4 +183,19 @@
 }
 .darkContainer .textWrapper {
   color: #8d8e97;
+}
+.likeStatusButton {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 42px;
+}
+.like svg path {
+  fill: #2231aa;
+}
+.dislike svg path {
+  fill: red;
+}
+.favouritePost svg path {
+  fill: #a1a100;
 }

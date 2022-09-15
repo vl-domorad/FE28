@@ -5,35 +5,33 @@ import styles from "./Tabs.module.css";
 import classNames from "classnames";
 
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
-import {TabsProps} from './types'
+import { TabsProps } from "./types";
 
-const Tabs: FC<TabsProps> = ({ tabs }) => {
-  const targetTabs = (evt: MouseEvent<HTMLButtonElement>) => {
-    console.log(evt.target);
-  };
+const Tabs: FC<TabsProps> = ({ tabs, onClick, activeTab }) => {
   const { theme } = useThemeContext();
 
   return (
     <div
       className={classNames(styles.wrapper, styles.wrapperTabs, {
-        [styles.darkContainer]: theme === Theme.Dark
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       <ul className={styles.tabList}>
-        {tabs.map(tab => {
+        {tabs.map(({ key, disabled, title }) => {
           return (
-            <li key={tab.key}>
-              <button onClick={targetTabs} disabled={tab.disabled}>
-                {tab.title}
+            <li
+              key={key}
+              className={classNames({
+                [styles.activeTab]: activeTab === key,
+              })}
+            >
+              <button onClick={() => onClick(key)} disabled={disabled}>
+                {title}
               </button>
             </li>
           );
         })}
       </ul>
-      <br />
-      <br />
-
     </div>
   );
 };

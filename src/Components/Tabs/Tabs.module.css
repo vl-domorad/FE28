@@ -47,9 +47,10 @@ ul.tabList li {
   color:#313037;
 
 }
-ul.tabList li:hover {
-  border-bottom: 2px solid #313037;
+.activeTab {
+  border-bottom: 2px solid #313037 !important;
 }
+
 ul.tabList button:disabled {
   opacity: 0.7;
   cursor: default;
@@ -62,6 +63,9 @@ ul.tabList button:disabled {
 
 .darkContainer ul.tabList button {
   color: #ffffff;
+}
+ul.tabList li:hover button {
+  color: #2231AA;
 }
 .darkContainer ul.tabList li:hover {
   color:#ffffff;

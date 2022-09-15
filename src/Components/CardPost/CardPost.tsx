@@ -4,16 +4,43 @@ import styles from "./CardPost.module.css";
 import { CardSize } from "../CardList";
 import classNames from "classnames";
 import {
+  BookMarksIcon,
+  Ellipsis,
   ThumbDownIcon,
   ThumbUpIcon,
-  Ellipsis,
-  BookMarksIcon
 } from "../../Assets/Icons";
 import { CardPostProps } from "./types";
-import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setFavouritePost,
+  setLikeStatus,
+} from "../../Redux/reducers/postsReducer";
+import { CardListType, LikeStatus } from "../../Utils/globalTypes";
+import PostsSelectors from "../../Redux/selectors/postsSelectors";
 
 const CardPost: FC<CardPostProps> = ({ post, size }) => {
-  const { image, text, date, title } = post;
+  const { image, text, date, title, id, likeStatus } = post;
+
+  const favouritePostsList: CardListType = useSelector(
+    PostsSelectors.getFavoritePosts
+  );
+
+  const currentPostIndex = favouritePostsList.findIndex(
+    (post) => post.id === id
+  );
+  const isFavorite = currentPostIndex !== -1;
+
+  const dispatch = useDispatch();
+
+  const onAddFavourite = (event: any) => {
+    event.stopPropagation();
+    dispatch(setFavouritePost(post));
+  };
+
+  const onStatusClick = (status: LikeStatus) => {
+    dispatch(setLikeStatus({ status, id }));
+  };
 
   const { theme } = useThemeContext();
 
@@ -43,11 +70,30 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
         </div>
         <div className={styles.iconsWrapper}>
           <div className={styles.iconsThumb}>
-            <ThumbUpIcon />
-            <ThumbDownIcon />
+            <div
+              onClick={() => onStatusClick(LikeStatus.Like)}
+              className={classNames(styles.likeStatusButton, {
+                [styles.like]: likeStatus === LikeStatus.Like,
+              })}
+            >
+              <ThumbUpIcon /> {likeStatus === LikeStatus.Like && 1}
+            </div>
+            <div
+              onClick={() => onStatusClick(LikeStatus.Dislike)}
+              className={classNames(styles.likeStatusButton, {
+                [styles.dislike]: likeStatus === LikeStatus.Dislike,
+              })}
+            >
+              <ThumbDownIcon /> {likeStatus === LikeStatus.Dislike && 1}
+            </div>
           </div>
           <div className={styles.iconsOptions}>
-            <BookMarksIcon />
+            <div
+              onClick={onAddFavourite}
+              className={classNames({ [styles.favouritePost]: isFavorite })}
+            >
+              <BookMarksIcon />
+            </div>
             <Ellipsis />
           </div>
         </div>
