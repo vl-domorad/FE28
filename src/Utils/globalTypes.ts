@@ -19,3 +19,9 @@ export type CardPostType = {
   likeStatus?: LikeStatus | null;
 };
 export type CardListType = Array<CardPostType>;
+
+export type UserActionPayload = {
+  username: string;
+  password: string;
+  email: string;
+};

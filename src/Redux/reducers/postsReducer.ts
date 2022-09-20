@@ -24,6 +24,7 @@ const postsReducer = createSlice({
   name: "posts",
   initialState: INITIAL_STATE,
   reducers: {
+    getPosts: (state, action: PayloadAction<undefined>) => {},
     setSelectedPost: (state, action: PayloadAction<CardPostType | null>) => {
       state.selectedPost = action.payload;
     },
@@ -80,6 +81,7 @@ const postsReducer = createSlice({
 export default postsReducer.reducer;
 
 export const {
+  getPosts,
   setSelectedPost,
   setActiveTab,
   setCardsList,

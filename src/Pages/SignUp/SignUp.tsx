@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 //@ts-ignore
 import styles from "./SignUp.module.css";
@@ -11,7 +11,8 @@ import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { PathNames } from "../../Pages/Router/Router";
-
+import { createNewUser } from "../../Redux/reducers/authReducer";
+import { useDispatch } from "react-redux";
 
 const validateEmail = (email: string) => {
   return String(email)
@@ -22,6 +23,7 @@ const validateEmail = (email: string) => {
 };
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const [email, setEmail] = useState("");
@@ -78,10 +80,14 @@ const SignUp = () => {
     setConfirmPasswordTouched(true);
   };
 
+  const onSignUp = () => {
+    dispatch(createNewUser({ username: name, email, password }));
+  };
+
   return (
     <div
       className={classNames(styles.container, {
-        [styles.darkContainer]: theme === Theme.Dark
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       <div className={styles.headForm}>
@@ -135,9 +141,7 @@ const SignUp = () => {
           <Button
             type={ButtonType.Primary}
             title={"Sign Up"}
-            onClick={() => {
-              console.log("primary");
-            }}
+            onClick={onSignUp}
             className={styles.signUpBtn}
             disabled={false}
           />
