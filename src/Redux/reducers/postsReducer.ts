@@ -11,6 +11,8 @@ type PostStateType = {
   activeTab: TabsNames;
   cardsList: CardListType;
   favouritePostsList: CardListType;
+  singlePost: CardPostType | null;
+  isPostLoading: boolean;
 };
 
 const INITIAL_STATE: PostStateType = {
@@ -18,6 +20,8 @@ const INITIAL_STATE: PostStateType = {
   activeTab: TabsNames.All,
   cardsList: [],
   favouritePostsList: [],
+  singlePost: null,
+  isPostLoading: false,
 };
 
 const postsReducer = createSlice({
@@ -25,6 +29,13 @@ const postsReducer = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     getPosts: (state, action: PayloadAction<undefined>) => {},
+    getSinglePost: (state, action: PayloadAction<string>) => {},
+    setSinglePost: (state, action: PayloadAction<CardPostType>) => {
+      state.singlePost = action.payload;
+    },
+    setSinglePostLoading: (state, action: PayloadAction<boolean>) => {
+      state.isPostLoading = action.payload;
+    },
     setSelectedPost: (state, action: PayloadAction<CardPostType | null>) => {
       state.selectedPost = action.payload;
     },
@@ -87,4 +98,7 @@ export const {
   setCardsList,
   setFavouritePost,
   setLikeStatus,
+  getSinglePost,
+  setSinglePost,
+  setSinglePostLoading,
 } = postsReducer.actions;

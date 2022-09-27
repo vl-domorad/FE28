@@ -13,7 +13,7 @@ export enum PathNames {
   SignIn = "/sign-in",
   SignUp = "/sign-up",
   Search = "/search",
-  PostContent = "/content",
+  PostContent = "/content/:id",
   ActivateUser = "/activate/:uid/:token",
 }
 

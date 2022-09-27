@@ -17,4 +17,8 @@ const activateNewUser = (params: ActivationParams) => {
   return API.post("/auth/users/activation/", params); // - тело;
 };
 
-export default { createNewUser, getPostsList, activateNewUser };
+const getPost = (id: string) => {
+  return API.get(`/blog/posts/${id}/`);
+};
+
+export default { createNewUser, getPostsList, activateNewUser, getPost };

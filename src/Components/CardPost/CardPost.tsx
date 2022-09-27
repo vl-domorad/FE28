@@ -18,9 +18,12 @@ import {
 } from "../../Redux/reducers/postsReducer";
 import { CardListType, LikeStatus } from "../../Utils/globalTypes";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
+import { useNavigate } from "react-router-dom";
 
 const CardPost: FC<CardPostProps> = ({ post, size }) => {
   const { image, text, date, title, id, likeStatus } = post;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const favouritePostsList: CardListType = useSelector(
     PostsSelectors.getFavoritePosts
@@ -30,8 +33,6 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
     (post) => post.id === id
   );
   const isFavorite = currentPostIndex !== -1;
-
-  const dispatch = useDispatch();
 
   const onAddFavourite = (event: any) => {
     event.stopPropagation();
@@ -44,61 +45,64 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
 
   const { theme } = useThemeContext();
 
+  const onCardClick = () => {
+    navigate(`/content/${id}`);
+  };
+
   return (
-    <>
-      <div
-        className={classNames(styles.post, {
-          [styles.largePost]: size === CardSize.Large,
-          [styles.mediumPost]: size === CardSize.Medium,
-          [styles.smallPost]: size === CardSize.Small,
-          [styles.darkContainer]: theme === Theme.Dark,
-        })}
-      >
-        <div className={styles.textImgWrap}>
-          <div className={styles.contentWrapper}>
-            <div className={styles.titleWrapper}>
-              <div className={styles.date}>{date}</div>
-              <div className={styles.title}>{title}</div>
-            </div>
-            {size === CardSize.Large && (
-              <div className={styles.textWrapper}>{text}</div>
-            )}
+    <div
+      className={classNames(styles.post, {
+        [styles.largePost]: size === CardSize.Large,
+        [styles.mediumPost]: size === CardSize.Medium,
+        [styles.smallPost]: size === CardSize.Small,
+        [styles.darkContainer]: theme === Theme.Dark,
+      })}
+      onClick={onCardClick}
+    >
+      <div className={styles.textImgWrap}>
+        <div className={styles.contentWrapper}>
+          <div className={styles.titleWrapper}>
+            <div className={styles.date}>{date}</div>
+            <div className={styles.title}>{title}</div>
           </div>
-          <div className={styles.imgWrapper}>
-            <img src={image} alt="img" />
-          </div>
+          {size === CardSize.Large && (
+            <div className={styles.textWrapper}>{text}</div>
+          )}
         </div>
-        <div className={styles.iconsWrapper}>
-          <div className={styles.iconsThumb}>
-            <div
-              onClick={() => onStatusClick(LikeStatus.Like)}
-              className={classNames(styles.likeStatusButton, {
-                [styles.like]: likeStatus === LikeStatus.Like,
-              })}
-            >
-              <ThumbUpIcon /> {likeStatus === LikeStatus.Like && 1}
-            </div>
-            <div
-              onClick={() => onStatusClick(LikeStatus.Dislike)}
-              className={classNames(styles.likeStatusButton, {
-                [styles.dislike]: likeStatus === LikeStatus.Dislike,
-              })}
-            >
-              <ThumbDownIcon /> {likeStatus === LikeStatus.Dislike && 1}
-            </div>
-          </div>
-          <div className={styles.iconsOptions}>
-            <div
-              onClick={onAddFavourite}
-              className={classNames({ [styles.favouritePost]: isFavorite })}
-            >
-              <BookMarksIcon />
-            </div>
-            <Ellipsis />
-          </div>
+        <div className={styles.imgWrapper}>
+          <img src={image} alt="img" />
         </div>
       </div>
-    </>
+      <div className={styles.iconsWrapper}>
+        <div className={styles.iconsThumb}>
+          <div
+            onClick={() => onStatusClick(LikeStatus.Like)}
+            className={classNames(styles.likeStatusButton, {
+              [styles.like]: likeStatus === LikeStatus.Like,
+            })}
+          >
+            <ThumbUpIcon /> {likeStatus === LikeStatus.Like && 1}
+          </div>
+          <div
+            onClick={() => onStatusClick(LikeStatus.Dislike)}
+            className={classNames(styles.likeStatusButton, {
+              [styles.dislike]: likeStatus === LikeStatus.Dislike,
+            })}
+          >
+            <ThumbDownIcon /> {likeStatus === LikeStatus.Dislike && 1}
+          </div>
+        </div>
+        <div className={styles.iconsOptions}>
+          <div
+            onClick={onAddFavourite}
+            className={classNames({ [styles.favouritePost]: isFavorite })}
+          >
+            <BookMarksIcon />
+          </div>
+          <Ellipsis />
+        </div>
+      </div>
+    </div>
   );
 };
 export default CardPost;
