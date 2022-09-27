@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React from "react";
 // import { HamburgerMenu } from "react-hamburger-menu";
 //@ts-ignore
 import styles from "./Navbar.module.css";
@@ -10,17 +10,26 @@ import {
   CancelIcon,
   SearchIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
+  UserIcon,
 } from "../../Assets/Icons";
 import classNames from "classnames";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+import { useSelector } from "react-redux";
+import AuthSelectors from "../../Redux/selectors/authSelectors";
+import { useNavigate } from "react-router-dom";
+import { PathNames } from "../../Pages/Router/Router";
 
-const Navbar = ({
-  onClick,
-  input,
-  isOpened,
-}: any) => {
+const Navbar = ({ onClick, input, isOpened }: any) => {
   const { theme, onChangeTheme } = useThemeContext();
+
+  const currentUser = useSelector(AuthSelectors.getCurrentUser);
+
+  const navigate = useNavigate();
+
+  const onSignInClick = () => {
+    navigate(PathNames.SignIn);
+  };
 
   return (
     <div className={classNames(styles.navbarMenu)}>
@@ -44,7 +53,13 @@ const Navbar = ({
           >
             <SearchIcon />
           </div>
-          <User userName={"Artem Malkin"} />
+          {currentUser ? (
+            <User userName={"Artem Malkin"} />
+          ) : (
+            <div className={styles.noUserIconContainer} onClick={onSignInClick}>
+              <UserIcon />
+            </div>
+          )}
         </div>
       </nav>
       {isOpened && <Menu />}

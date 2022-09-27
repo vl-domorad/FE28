@@ -1,24 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Blog from "../Blog";
+
 import PagesWrapper from "../PagesWrapper";
 import PostContent from "../PostContent";
 import Search from "../Search";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
-import {NavLink} from 'react-router-dom'
+import ActivateUser from "../ActivateUser";
 
-
-
-
-export enum PathNames{
-    Home = '/',
-    SignIn='/sign-in',
-    SignUp='/sign-up',
-    Search='/search',
-    PostContent='/content',
+export enum PathNames {
+  Home = "/",
+  SignIn = "/sign-in",
+  SignUp = "/sign-up",
+  Search = "/search",
+  PostContent = "/content",
+  ActivateUser = "/activate/:uid/:token",
 }
-
 
 const Router = () => {
   return (
@@ -29,9 +26,9 @@ const Router = () => {
           <Route path={PathNames.SignUp} element={<SignUp />} />
           <Route path={PathNames.Search} element={<Search />} />
           <Route path={PathNames.PostContent} element={<PostContent />} />
+          <Route path={PathNames.ActivateUser} element={<ActivateUser />} />
         </Route>
-        <Route path={'*'} element={<Navigate to={PathNames.SignIn}/>} />
-
+        <Route path={"*"} element={<Navigate to={PathNames.SignIn} />} />
       </Routes>
     </BrowserRouter>
   );
