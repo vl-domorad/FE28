@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 //@ts-ignore
 import styles from "./SignIn.module.css";
 import classNames from "classnames";
@@ -8,7 +10,8 @@ import Input from "../../Components/Input";
 import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import { PathNames } from "../../Pages/Router/Router";
+import { PathNames } from "../Router/Router";
+import { authUser } from "../../Redux/reducers/authReducer";
 
 const validateEmail = (email: string) => {
   return String(email)
@@ -19,6 +22,8 @@ const validateEmail = (email: string) => {
 };
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
@@ -27,7 +32,7 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState("");
   const [passwordTouched, setPasswordTouched] = useState(false);
 
-  const { theme} = useThemeContext();
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     if (emailTouched && !validateEmail(email)) {
@@ -58,10 +63,14 @@ const SignIn = () => {
     setEmailTouched(true);
   };
 
+  const onSignIn = () => {
+    dispatch(authUser({ email, password }));
+  };
+
   return (
     <div
       className={classNames(styles.container, {
-        [styles.darkContainer]: theme === Theme.Dark
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       <div className={styles.headForm}>
@@ -90,17 +99,21 @@ const SignIn = () => {
             value={password}
             error={!!passwordError}
           />
-          {passwordTouched && passwordError && <div className={classNames(styles.passwordError)} >{passwordError}</div>}
-          <div className={classNames(styles.forgotPassword)}>Forgot password?</div>
+          {passwordTouched && passwordError && (
+            <div className={classNames(styles.passwordError)}>
+              {passwordError}
+            </div>
+          )}
+          <div className={classNames(styles.forgotPassword)}>
+            Forgot password?
+          </div>
         </div>
-        
+
         <div>
           <Button
             type={ButtonType.Primary}
             title={"Sign In"}
-            onClick={() => {
-              console.log("primary");
-            }}
+            onClick={onSignIn}
             className={styles.signInBtn}
             disabled={false}
           />

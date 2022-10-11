@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  CardListType,
-  CardPostType,
-  LikeStatus,
-  TabsNames,
-} from "../../Utils/globalTypes";
+import { CardListType, CardPostType, LikeStatus, TabsNames } from "../../Utils";
 
 type PostStateType = {
   selectedPost: CardPostType | null;

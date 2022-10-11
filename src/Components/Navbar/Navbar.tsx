@@ -24,6 +24,10 @@ const Navbar = ({ onClick, input, isOpened }: any) => {
   const { theme, onChangeTheme } = useThemeContext();
 
   const currentUser = useSelector(AuthSelectors.getCurrentUser);
+  //TODO сделать useEffect
+  const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
+
+  // if(isAuthenticated) {dispatch(getCurrentUser())} - это в useEffect, [isAuthenticated]
 
   const navigate = useNavigate();
 
