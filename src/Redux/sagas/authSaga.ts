@@ -16,6 +16,7 @@ import {
   REFRESH_TOKEN_NAME,
 } from "../../Utils";
 import Api from "../api";
+import callCheckingAuth from "./callCheckingAuth";
 
 function* createNewUserWorker(action: PayloadAction<UserActionPayload>) {
   const { status, problem } = yield call(Api.createNewUser, action.payload);
@@ -50,14 +51,7 @@ function* authUserWorker(action: PayloadAction<AuthUserPayload>) {
 }
 
 function* getCurrentUser() {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_NAME);
-  if (accessToken) {
-    //TODO тут дописываем сагу
-    const { status, problem, data } = yield call(
-      Api.getCurrentUser,
-      accessToken
-    );
-  }
+  const { status, problem, data } = yield callCheckingAuth(Api.getCurrentUser);
 }
 
 export default function* authWatcher() {

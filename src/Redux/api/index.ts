@@ -43,6 +43,14 @@ const getCurrentUser = (token: string) => {
   );
 };
 
+const verifyToken = (token: string) => {
+  return API.post("/auth/jwt/verify/", { token });
+};
+
+const refreshToken = (refresh: string) => {
+  return API.post("/auth/jwt/refresh/", { refresh });
+};
+
 export default {
   createNewUser,
   getPostsList,
@@ -50,4 +58,6 @@ export default {
   getPost,
   authUser,
   getCurrentUser,
+  verifyToken,
+  refreshToken,
 };
