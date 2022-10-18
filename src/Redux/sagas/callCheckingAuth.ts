@@ -1,8 +1,9 @@
 //@ts-nocheck
-import { call } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 
 import Api from "../api";
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../Utils";
+import { logoutUser } from "../reducers/authReducer";
 
 function* callCheckingAuth(api, ...allRestParams) {
   const accessToken = localStorage.getItem(ACCESS_TOKEN_NAME); // Достали accessToken
@@ -30,11 +31,11 @@ function* callCheckingAuth(api, ...allRestParams) {
         } else {
           console.log(problem);
           // Что-то пошло сильно не так - выносим человека из приложения от греха подальше
-          // TODO: дописать logout()
+          yield put(logoutUser());
         }
       } else {
         // refreshToken умер
-        // TODO: дописать logout()
+        yield put(logoutUser());
       }
     } else {
       return response;

@@ -9,7 +9,7 @@ import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 import Input from "../../Components/Input";
 import Blog from "../../Pages/Blog";
-import {PathNames }from "../Router/Router";
+import { PathNames } from "../Router/Router";
 
 import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
 
@@ -21,16 +21,14 @@ const PagesWrapper = () => {
   };
   const [isOpened, setOpened] = useState(false);
 
-
   const { theme } = useThemeContext();
 
   const location = useLocation();
 
-
   return (
     <div
       className={classNames(styles.app, {
-        [styles.darkContainer]: theme === Theme.Dark
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       <Navbar
@@ -46,8 +44,8 @@ const PagesWrapper = () => {
           )
         }
       />
-     {/* <Outlet/> */}
-     {location.pathname === PathNames.Home ? <Blog/>:<Outlet/>}
+      {/* <Outlet/> */}
+      {location.pathname === PathNames.Home ? <Blog /> : <Outlet />}
       <Footer />
     </div>
   );

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CardList from "../../Components/CardList";
 import Title from "../../Components/Title";
 import Tabs from "../../Components/Tabs";
-import { TabsNames } from "../../Utils/globalTypes";
+import { TabsNames } from "../../Utils";
 import { getPosts, setActiveTab } from "../../Redux/reducers/postsReducer";
 //@ts-ignore
 import styles from "./Blog.module.css";
@@ -150,9 +150,12 @@ const TABS_NAME = [
 //     author: 0,
 //   },
 // ];
-const Blog = () => {
+
+const Blog = ({ isMyPosts }: any) => {
   const activeTab = useSelector(PostsSelectors.getActiveTab);
-  const cardsList = useSelector(PostsSelectors.getCardsList);
+  const cardsList = useSelector(
+    isMyPosts ? PostsSelectors.getCardsList : PostsSelectors.getCardsList
+  );
 
   const dispatch = useDispatch();
 

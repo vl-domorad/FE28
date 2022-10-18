@@ -6,6 +6,9 @@ import {
   createNewUser,
   authUser,
   setAuthStatus,
+  logoutUser,
+  getUser,
+  setUser,
 } from "../reducers/authReducer";
 import {
   ActivateUserPayload,
@@ -50,8 +53,19 @@ function* authUserWorker(action: PayloadAction<AuthUserPayload>) {
   }
 }
 
+function* logout() {
+  localStorage.removeItem(ACCESS_TOKEN_NAME);
+  localStorage.removeItem(REFRESH_TOKEN_NAME);
+  yield put(setAuthStatus(false));
+}
+
 function* getCurrentUser() {
   const { status, problem, data } = yield callCheckingAuth(Api.getCurrentUser);
+  if (status === 200) {
+    yield put(setUser(data));
+  } else {
+    console.log("Error getting user", problem);
+  }
 }
 
 export default function* authWatcher() {
@@ -59,5 +73,7 @@ export default function* authWatcher() {
     takeLatest(createNewUser, createNewUserWorker),
     takeLatest(activateUser, activateUserWorker),
     takeLatest(authUser, authUserWorker),
+    takeLatest(logoutUser, logout),
+    takeLatest(getUser, getCurrentUser),
   ]);
 }

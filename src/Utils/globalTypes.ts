@@ -43,3 +43,9 @@ export type AuthUserPayload = {
   email: string;
   password: string;
 };
+
+export type User = {
+  username: string;
+  id: number;
+  email: string;
+};

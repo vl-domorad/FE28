@@ -23,9 +23,9 @@ import { PathNames } from "../../Pages/Router/Router";
 const Navbar = ({ onClick, input, isOpened }: any) => {
   const { theme, onChangeTheme } = useThemeContext();
 
-  const currentUser = useSelector(AuthSelectors.getCurrentUser);
   //TODO сделать useEffect
   const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
+  const currentUser = useSelector(AuthSelectors.getCurrentUser);
 
   // if(isAuthenticated) {dispatch(getCurrentUser())} - это в useEffect, [isAuthenticated]
 
@@ -58,7 +58,7 @@ const Navbar = ({ onClick, input, isOpened }: any) => {
             <SearchIcon />
           </div>
           {currentUser ? (
-            <User userName={"Artem Malkin"} />
+            <User userName={currentUser?.username || ""} />
           ) : (
             <div className={styles.noUserIconContainer} onClick={onSignInClick}>
               <UserIcon />

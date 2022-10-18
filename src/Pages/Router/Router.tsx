@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import PagesWrapper from "../PagesWrapper";
 import PostContent from "../PostContent";
@@ -9,6 +9,8 @@ import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 import ActivateUser from "../ActivateUser";
 import AuthSelectors from "../../Redux/selectors/authSelectors";
+import { getUser } from "../../Redux/reducers/authReducer";
+import Blog from "../Blog";
 
 export enum PathNames {
   Home = "/",
@@ -16,11 +18,20 @@ export enum PathNames {
   SignUp = "/sign-up",
   Search = "/search",
   PostContent = "/content/:id",
+  MyPosts = "/my-posts",
   ActivateUser = "/activate/:uid/:token",
 }
 
 const Router = () => {
   const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getUser());
+    }
+  }, [isAuthenticated]);
 
   return (
     <BrowserRouter>
@@ -41,6 +52,16 @@ const Router = () => {
             element={
               !isAuthenticated ? (
                 <SignUp />
+              ) : (
+                <Navigate to={PathNames.Home} replace />
+              )
+            }
+          />
+          <Route
+            path={PathNames.MyPosts}
+            element={
+              !isAuthenticated ? (
+                <Blog isMyPosts />
               ) : (
                 <Navigate to={PathNames.Home} replace />
               )
