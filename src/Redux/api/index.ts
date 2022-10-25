@@ -2,29 +2,23 @@ import { create } from "apisauce";
 import {
   ActivationParams,
   AuthUserPayload,
-  UserActionPayload,
+  UserActionPayload
 } from "../../Utils/globalTypes";
 
-// apisauce -> обертка над axios -> обертка над fetch
-
 const API = create({
-  baseURL: "https://studapi.teachmeskills.by",
+  baseURL: "https://studapi.teachmeskills.by"
 });
 
 const createNewUser = (userData: UserActionPayload) => {
-  return API.post("/auth/users/", userData); // - тело;
+  return API.post("/auth/users/", userData);
 };
 
-// API: "https://studapi.teachmeskills.by", + "/auth/users/" - а довезти до BE - userData
-// createNewUser(userData)
-// fetch("https://studapi.teachmeskills.by/auth/users/", method: 'POST', body: userData)
-
 const getPostsList = () => {
-  return API.get("/blog/posts/?limit=10"); // - параметры;
+  return API.get("/blog/posts/?limit=10");
 };
 
 const activateNewUser = (params: ActivationParams) => {
-  return API.post("/auth/users/activation/", params); // - тело;
+  return API.post("/auth/users/activation/", params);
 };
 
 const getPost = (id: string) => {
@@ -34,6 +28,7 @@ const getPost = (id: string) => {
 const authUser = (params: AuthUserPayload) => {
   return API.post("/auth/jwt/create/", params);
 };
+
 
 const getCurrentUser = (token: string) => {
   return API.get(
@@ -60,4 +55,5 @@ export default {
   getCurrentUser,
   verifyToken,
   refreshToken,
+  
 };

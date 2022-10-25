@@ -12,3 +12,8 @@
     background-color: #313037;
   
   }
+  .modalActive{
+    background: rgba(38, 34, 47, 0.5);
+    position: relative;
+    z-index: 3;
+}

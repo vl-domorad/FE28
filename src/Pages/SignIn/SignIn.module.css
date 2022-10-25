@@ -48,18 +48,26 @@
   align-self: center;
 }
 
+.backHomeBtn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 /* DarkTheme */
-
 
 .darkContainer {
   background-color: #313037;
   color: #ffffff;
-
 }
 .darkContainer .formContainer {
   background-color: #313037;
   border: 1px solid #8d8e97;
 }
+.darkContainer a:visited {
+  color: rgb(170, 170, 233);
+}
+.darkContainer a:hover {
+  cursor: pointer;
+  color: rgb(228, 128, 98);
+}
 /*  */
-

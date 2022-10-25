@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+// import { useParams } from "react-router-dom";
+
 //@ts-ignore
 import styles from "./Post.module.css";
 import classNames from "classnames";
@@ -6,11 +8,21 @@ import { PostProps } from "./types";
 
 import { ThumbDownIcon, ThumbUpIcon, BookMarksIcon } from "../../Assets/Icons";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+import { PathNames } from "../../Pages/Router/Router";
+import { useNavigate } from "react-router-dom";
 
 const Post: FC<PostProps> = ({ post }) => {
   const { image, text, title } = post;
 
   const { theme } = useThemeContext();
+  // const params = useParams()
+  // console.log(params)
+
+  const navigate = useNavigate();
+
+  const onBackHomeClick = () => {
+    navigate(PathNames.Home);
+  };
 
   return (
     <>
@@ -20,7 +32,7 @@ const Post: FC<PostProps> = ({ post }) => {
         })}
       >
         <div className={styles.head}>
-          <div className={styles.homePost}>Home <span>| Post14278</span></div>
+          <div className={styles.homePost} onClick={onBackHomeClick}>Home <span>| Post14278</span></div>
         <div className={styles.title}>{title}</div>
         </div>
         

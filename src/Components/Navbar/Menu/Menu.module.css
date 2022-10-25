@@ -7,59 +7,72 @@
   width: 231px;
   margin-bottom: 30px;
   border-top: 1px solid rgb(83, 96, 205);
+  position: absolute;
+  top: 84px;
+  transition: 0.1ms;
 }
 
 .listMenu li {
   text-align: center;
-  padding: 30px 0;
+
   border-bottom: 1px solid #dadada;
   font-size: 16px;
   font-weight: 600;
   color: rgba(49, 48, 55, 1);
   cursor: pointer;
   transition: 0.1;
-  
 }
-a{
-  text-decoration: none;
-}
-/* a:visited{
-  color: rgba(49, 48, 55, 1);
 
-} */
+.listMenu li > a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+
+}
+
+.currentUser {
+  padding: 0;
+  background: red;
+}
+
+.logOut {
+  background: #e8e8e8;
+  color: #313037;
+  padding: 30px 0;
+
+}
+
 .listMenu li:first-child {
   border-top: none;
 }
 .listMenu li:hover {
   box-shadow: 4px 3px 15px 1px #9c9cee;
 }
-.listMenu :first-child {
-  padding: 0;
+
+/* activelink */
+
+.activeLink {
+  color: rgba(34, 49, 170, 1);
 }
-
-
+.inactiveLink {
+  color: rgba(49, 48, 55, 1);
+}
 
 /* dark theme */
 
 .darkContainer li {
   background-color: #313037;
   color: #ffffff;
-  /* #a8acff */ 
+  /* #a8acff */
   border-bottom: 1px solid #8d8e97;
   border-right: 1px solid #8d8e97;
   border-left: 1px solid #8d8e97;
 }
-.darkContainer :nth-child(2) {
+.darkContainer .activeLink {
   color: #a8acff;
 }
-/* .darkContainer a:visited{
+.darkContainer .inactiveLink {
   color: white;
-
-} */
-
-
-/* activelink */
-
-.activeLink {
-  color: rgba(34, 49, 170, 1);
 }

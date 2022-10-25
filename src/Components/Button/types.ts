@@ -9,7 +9,7 @@ export type ButtonClassnamesType = {
 
 export type ButtonPropsType = {
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   disabled?: boolean;
   type: ButtonType;

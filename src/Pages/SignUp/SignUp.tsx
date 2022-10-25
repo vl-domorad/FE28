@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom'
 
 //@ts-ignore
 import styles from "./SignUp.module.css";
@@ -10,9 +10,10 @@ import Input from "../../Components/Input";
 import Button, { ButtonType } from "../../Components/Button";
 import Label from "../../Components/Label";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import { PathNames } from "../../Pages/Router/Router";
-import { createNewUser } from "../../Redux/reducers/authReducer";
+import { PathNames } from "../Router/Router";
 import { useDispatch } from "react-redux";
+import { createNewUser } from "../../Redux/reducers/authReducer";
+
 
 const validateEmail = (email: string) => {
   return String(email)
@@ -23,7 +24,7 @@ const validateEmail = (email: string) => {
 };
 
 const SignUp = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
 
   const [email, setEmail] = useState("");
@@ -80,18 +81,23 @@ const SignUp = () => {
     setConfirmPasswordTouched(true);
   };
 
-  const onSignUp = () => {
-    dispatch(createNewUser({ username: name, email, password }));
-  };
+  const onSignUp = ()=>{
+    dispatch(createNewUser({username: name, email, password}))
+  }
 
+  const navigate = useNavigate();
+
+  const onBackHomeClick = () => {
+    navigate(PathNames.Home);
+  };
   return (
     <div
       className={classNames(styles.container, {
-        [styles.darkContainer]: theme === Theme.Dark,
+        [styles.darkContainer]: theme === Theme.Dark
       })}
     >
       <div className={styles.headForm}>
-        <div>Back to Home</div>
+        <div className={styles.backHomeBtn} onClick={onBackHomeClick}>Back to Home</div>
         <Title title={"Sign Up"} />
       </div>
       <div className={styles.formContainer}>

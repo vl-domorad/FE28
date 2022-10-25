@@ -1,35 +1,37 @@
-import { all, call, takeLatest, put } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-
-import {
-  activateUser,
-  createNewUser,
-  authUser,
-  setAuthStatus,
-  logoutUser,
-  getUser,
-  setUser,
-} from "../reducers/authReducer";
+import { all, takeLatest, call, put } from "redux-saga/effects";
 import {
   ActivateUserPayload,
   AuthUserPayload,
   RegistrationStatus,
   UserActionPayload,
   ACCESS_TOKEN_NAME,
-  REFRESH_TOKEN_NAME,
+  REFRESH_TOKEN_NAME
 } from "../../Utils";
+import {
+  activateUser,
+  createNewUser,
+  authUser,
+  setAuthStatus,
+  setUser,
+  getUser,
+  logoutUser
+} from "../reducers/authReducer";
+
 import Api from "../api";
 import callCheckingAuth from "./callCheckingAuth";
 
 function* createNewUserWorker(action: PayloadAction<UserActionPayload>) {
   const { status, problem } = yield call(Api.createNewUser, action.payload);
+
   if (status === 200) {
     console.log("REGISTERED");
   } else {
     console.log("PROBLEM", problem);
   }
-}
 
+  //   console.log("FROM SAGA", action.payload);
+}
 function* activateUserWorker(action: PayloadAction<ActivateUserPayload>) {
   const { params, callback } = action.payload;
   const { status, problem } = yield call(Api.activateNewUser, params);
@@ -61,6 +63,7 @@ function* logout() {
 
 function* getCurrentUser() {
   const { status, problem, data } = yield callCheckingAuth(Api.getCurrentUser);
+
   if (status === 200) {
     yield put(setUser(data));
   } else {
@@ -73,7 +76,8 @@ export default function* authWatcher() {
     takeLatest(createNewUser, createNewUserWorker),
     takeLatest(activateUser, activateUserWorker),
     takeLatest(authUser, authUserWorker),
-    takeLatest(logoutUser, logout),
+    takeLatest(logoutUser, logout), 
     takeLatest(getUser, getCurrentUser),
+
   ]);
 }

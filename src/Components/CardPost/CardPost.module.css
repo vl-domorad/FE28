@@ -87,6 +87,7 @@
   align-items: center;
   display: flex;
   overflow: hidden;
+  cursor: pointer;
 }
 .imgWrapper img {
   width: 100%;
@@ -180,6 +181,8 @@
 }
 .darkContainer .title:hover {
   text-shadow: 1px -1px 4px white;
+  transition: 0.1ms;
+
 }
 .darkContainer .textWrapper {
   color: #8d8e97;
@@ -193,8 +196,16 @@
 .like svg path {
   fill: #2231aa;
 }
+.darkContainer .like svg path{
+  fill: #aab3f1;
+
+}
 .dislike svg path {
   fill: red;
+}
+.darkContainer .dislike svg path{
+  fill: rgb(255, 46, 46);
+
 }
 .favouritePost svg path {
   fill: #a1a100;

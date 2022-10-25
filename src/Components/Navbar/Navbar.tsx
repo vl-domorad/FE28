@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 // import { HamburgerMenu } from "react-hamburger-menu";
 //@ts-ignore
 import styles from "./Navbar.module.css";
@@ -11,24 +11,31 @@ import {
   SearchIcon,
   SunIcon,
   MoonIcon,
-  UserIcon,
+  UserIcon
 } from "../../Assets/Icons";
 import classNames from "classnames";
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
+import Input from "../Input";
 import { useSelector } from "react-redux";
 import AuthSelectors from "../../Redux/selectors/authSelectors";
 import { useNavigate } from "react-router-dom";
 import { PathNames } from "../../Pages/Router/Router";
 
-const Navbar = ({ onClick, input, isOpened }: any) => {
+
+const Navbar = ({ onClick, isOpened }: any) => {
+
   const { theme, onChangeTheme } = useThemeContext();
 
-  //TODO сделать useEffect
-  const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
   const currentUser = useSelector(AuthSelectors.getCurrentUser);
 
-  // if(isAuthenticated) {dispatch(getCurrentUser())} - это в useEffect, [isAuthenticated]
 
+ 
+
+  const [value, setValue] = useState<string>("");
+
+  const onChange = (inputValue: string) => {
+    setValue(inputValue);
+  };
   const navigate = useNavigate();
 
   const onSignInClick = () => {
@@ -41,7 +48,13 @@ const Navbar = ({ onClick, input, isOpened }: any) => {
         <div className={styles.burgerButton} onClick={onClick}>
           {isOpened ? <CancelIcon /> : <MenuIcon />}
         </div>
-        {input}
+        {isOpened && (
+          <Input
+            placeholder={"Placeholder"}
+            onChange={onChange}
+            value={value}
+          />
+        )}
         <div className={styles.userSearchWrapper}>
           <div
             className={classNames(styles.sunMoonIcon)}
@@ -60,7 +73,7 @@ const Navbar = ({ onClick, input, isOpened }: any) => {
           {currentUser ? (
             <User userName={currentUser?.username || ""} />
           ) : (
-            <div className={styles.noUserIconContainer} onClick={onSignInClick}>
+            <div className={styles.userIcon} onClick={onSignInClick}>
               <UserIcon />
             </div>
           )}

@@ -1,0 +1,86 @@
+.confirmRegistation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.confirmRegistation .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 1120px;
+  margin: 0 auto;
+}
+
+.titleWrapper {
+  margin-top: 72px;
+  margin-right: auto;
+}
+.formContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 72px;
+  margin-bottom: 152px;
+  padding: 40px;
+  border: 1px solid #dadada;
+  width: 624px;
+  display: flex;
+  flex-direction: column;
+}
+ .backToHome:hover {
+  cursor: pointer;
+  text-decoration: underline
+}
+.buttonAndText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signUpButton {
+  margin: 0;
+  margin-top: 8px;
+  width: 100%;
+  text-decoration: none;
+}
+.text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #313037;
+  margin-bottom: 48px;
+  text-decoration: none;
+  text-align: center;
+}
+p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+/* Dark theme */
+.darkContainer {
+  background-color: #313037;
+  text-decoration: none;
+  color: #fff;
+}
+.darkContainer .formContainer{
+    border: 1px solid #8d8e97;
+}
+.darkContainer .text {
+    background-color: #313037;
+    text-decoration: none;
+    color: #fff;
+  }
+.darkContainer .backToHomeText {
+  color: black;
+  text-decoration: none;
+}
+
+.darkContainer .backToHome{
+  text-decoration: underline
+}
+.darkContainer .backToHome:hover {
+    cursor: pointer;
+    color: rgb(228, 128, 98);
+    text-decoration: underline
+  }

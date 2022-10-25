@@ -1,1 +1,1 @@
-export { default } from "./ActivateUser";
+export {default} from './ActivateUser'

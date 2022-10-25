@@ -1,11 +1,11 @@
 export enum TabsNames {
   All = "all",
   Favorites = "favorites",
-  Popular = "popular",
+  Popular = "popular"
 }
 export enum LikeStatus {
   Like = "like",
-  Dislike = "dislike",
+  Dislike = "dislike"
 }
 
 export type CardPostType = {
@@ -25,20 +25,20 @@ export type UserActionPayload = {
   password: string;
   email: string;
 };
-
 export enum RegistrationStatus {
   Success = "success",
   Failed = "failed",
-  Default = "default",
+  Default = "default"
 }
 
-export type ActivationParams = { uid: string; token: string };
-
+export type ActivationParams = {
+  uid: string;
+  token: string;
+};
 export type ActivateUserPayload = {
   params: ActivationParams;
   callback: (status: RegistrationStatus) => void;
 };
-
 export type AuthUserPayload = {
   email: string;
   password: string;

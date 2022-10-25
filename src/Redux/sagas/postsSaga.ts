@@ -1,11 +1,10 @@
-import { all, call, takeLatest, put } from "redux-saga/effects";
-
+import { all, takeLatest, call, put } from "redux-saga/effects";
 import {
   getPosts,
   getSinglePost,
   setCardsList,
   setSinglePost,
-  setSinglePostLoading,
+  setSinglePostLoading
 } from "../reducers/postsReducer";
 import Api from "../api";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -18,7 +17,6 @@ function* getPostsWorker() {
     console.log(problem);
   }
 }
-
 function* getSinglePostWorker(action: PayloadAction<string>) {
   yield put(setSinglePostLoading(true));
   const { data, status, problem } = yield call(Api.getPost, action.payload);
@@ -33,6 +31,7 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 export default function* postsSagaWatcher() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
+
     takeLatest(getSinglePost, getSinglePostWorker),
   ]);
 }

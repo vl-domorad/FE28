@@ -1,0 +1,56 @@
+.modalPost {
+
+  padding: 17px 21px 54px;
+  max-width: 886px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 886px;
+  height: 588px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: #ffffff;
+}
+
+.cancelButton > svg > path {
+  fill: grey;
+}
+.cancelButton {
+  align-self: flex-end;
+  margin-bottom:45px;
+  cursor: pointer;
+}
+
+/* ModalActive */
+
+.modalActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalContent {
+  width: 736px;
+  height: 455px;
+  margin: auto;
+
+}
+.darkContainer {
+  background-color: #383535;
+}
+
+.modalContentImg {
+  width: 329px;
+  height: 314px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+}
+.modalContentImg > img{
+  width: 100%;
+  height: 100%;
+}

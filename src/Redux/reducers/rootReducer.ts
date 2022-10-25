@@ -8,6 +8,7 @@ const reducer = combineReducers({
   themeReducer,
   postsReducer,
   authReducer,
+
 });
 
 export default reducer;

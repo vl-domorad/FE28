@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
+
+
+
 //@ts-ignore
 import styles from "./Menu.module.css";
 
@@ -18,6 +21,7 @@ const Menu = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+
   const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
   const currentUser = useSelector(AuthSelectors.getCurrentUser);
 
@@ -25,53 +29,55 @@ const Menu = () => {
     dispatch(logoutUser());
   };
 
+  const MENU_LINK = [
+    {
+      key: "Home",
+      title: "Home",
+      path: PathNames.Home
+    },
+    {
+      key: "Search",
+      title: "Search",
+      path: PathNames.Search
+    },
+    {
+      key: "Add post",
+      title: "Add post",
+      path: PathNames.PostContent
+    }
+  ];
+
   return (
     <ul
       className={classNames(styles.listMenu, {
-        [styles.darkContainer]: theme === Theme.Dark,
+        [styles.darkContainer]: theme === Theme.Dark
       })}
     >
       {isAuthenticated && currentUser && (
-        <li>
+        <li className={styles.currentUser}>
           <User userName={currentUser?.username || ""} />
         </li>
       )}
-      <li>
-        <NavLink
-          to={PathNames.Home}
-          className={classNames({
-            [styles.activeLink]: location.pathname === PathNames.Home,
-          })}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={PathNames.PostContent}
-          className={classNames({
-            [styles.activeLink]: location.pathname === PathNames.PostContent,
-          })}
-        >
-          Content
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={PathNames.Search}
-          className={classNames({
-            [styles.activeLink]: location.pathname === PathNames.Search,
-          })}
-        >
-          Search
-        </NavLink>
-      </li>
-      <li>Add post</li>
+      {MENU_LINK.map(({ key, title, path }) => {
+        return (
+          <li key={key}>
+            <NavLink
+              to={path}
+              className={classNames({
+                [styles.activeLink]: location.pathname === path,
+                [styles.inactiveLink]: location.pathname !== path
+              })}
+            >
+              {title}
+            </NavLink>
+          </li>
+        );
+      })}
       {isAuthenticated && (
-        <li>
+        <li className={styles.logOut}> 
           <div
             className={classNames({
-              [styles.activeLink]: location.pathname === PathNames.Search,
+              [styles.activeLink]: location.pathname === PathNames.Search
             })}
             onClick={onLogOut}
           >

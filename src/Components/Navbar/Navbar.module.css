@@ -1,4 +1,3 @@
-
 .navbarMenu {
   display: flex;
   justify-content: start;
@@ -30,25 +29,51 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  width: 84px;
+  height: 84px;
   border-right: 1px solid rgb(83, 96, 205);
   border-left: 1px solid rgb(83, 96, 205);
+}
+.searchIcon:hover  {
   cursor: pointer;
+  background-color: #f3f3f3;
 }
 .searchIcon:hover svg > path {
-  stroke: rgb(204, 209, 255);
+  stroke: rgb(83, 96, 205);
+
+}
+
+.userIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84px;
+  height: 84px;
+
+}
+.userIcon:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+}
+.userIcon:hover svg > path {
+  stroke: rgb(83, 96, 205);
 }
 .sunMoonIcon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
-  border-right: 1px solid rgb(83, 96, 205);
+  width: 84px;
+  height: 84px;
   border-left: 1px solid rgb(83, 96, 205);
+
+}
+.sunMoonIcon:hover  {
   cursor: pointer;
+  background-color: #f3f3f3;
 }
 .sunMoonIcon:hover svg > path {
-  fill: rgb(204, 209, 255);
+  fill: rgb(83, 96, 205);
+
 }
 .burgerButton {
   padding: 0px 30px;
@@ -59,22 +84,11 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-.burgerButton:hover svg > path{
-  fill: rgb(204, 209, 255);
-
-}
-.noUserIconContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 84px;
-}
-.noUserIconContainer:hover {
+.burgerButton:hover {
   cursor: pointer;
   background-color: #f3f3f3;
 }
-.noUserIconContainer:hover svg > path {
-  stroke: rgb(83, 96, 205);
+.burgerButton:hover svg > path {
+  fill: rgb(83, 96, 205);
 }

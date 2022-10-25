@@ -1,32 +1,30 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ActivateUser from "../ActivateUser";
 import PagesWrapper from "../PagesWrapper";
 import PostContent from "../PostContent";
 import Search from "../Search";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
-import ActivateUser from "../ActivateUser";
 import AuthSelectors from "../../Redux/selectors/authSelectors";
 import { getUser } from "../../Redux/reducers/authReducer";
-import Blog from "../Blog";
 
 export enum PathNames {
   Home = "/",
   SignIn = "/sign-in",
   SignUp = "/sign-up",
   Search = "/search",
-  PostContent = "/content/:id",
+  PostContent = "/posts/:id",
+  NewPost = "/add",
   MyPosts = "/my-posts",
-  ActivateUser = "/activate/:uid/:token",
+  ActivateUser = "/activate/:uid/:token"
 }
 
 const Router = () => {
   const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(getUser());
@@ -47,17 +45,7 @@ const Router = () => {
               )
             }
           />
-          <Route
-            path={PathNames.SignUp}
-            element={
-              !isAuthenticated ? (
-                <SignUp />
-              ) : (
-                <Navigate to={PathNames.Home} replace />
-              )
-            }
-          />
-          <Route
+          {/* <Route
             path={PathNames.MyPosts}
             element={
               !isAuthenticated ? (
@@ -66,8 +54,10 @@ const Router = () => {
                 <Navigate to={PathNames.Home} replace />
               )
             }
-          />
+          /> */}
+          <Route path={PathNames.SignUp} element={<SignUp />} />
           <Route path={PathNames.Search} element={<Search />} />
+          <Route path={PathNames.NewPost} element={<PostContent />} />
           <Route path={PathNames.PostContent} element={<PostContent />} />
           <Route path={PathNames.ActivateUser} element={<ActivateUser />} />
         </Route>
