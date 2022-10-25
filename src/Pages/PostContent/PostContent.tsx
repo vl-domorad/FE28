@@ -34,10 +34,8 @@ const PostContent = () => {
         className={styles.lottie__container__animation}
         animationData={processingAnimation}
         loop={true}
-      ></Lottie>
+      />
     </div>
-  
-  
   ); //ВМЕСТО null - анимашка, иначе - пост
 };
 export default PostContent;

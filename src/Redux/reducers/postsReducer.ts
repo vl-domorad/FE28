@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  CardListType,
-  CardPostType,
-  LikeStatus,
-  TabsNames
-} from "../../Utils/globalTypes";
+import { CardListType, CardPostType, LikeStatus, TabsNames } from "../../Utils";
 
 type PostStateType = {
   selectedPost: CardPostType | null;
@@ -16,7 +11,8 @@ type PostStateType = {
   favouritePostsList: CardListType;
   singlePost: CardPostType | null;
   isPostLoading: boolean;
-
+  isSearchPostsLoading: boolean;
+  searchedPosts: CardListType;
 };
 
 const INITIAL_STATE: PostStateType = {
@@ -29,6 +25,8 @@ const INITIAL_STATE: PostStateType = {
   favouritePostsList: [],
   singlePost: null,
   isPostLoading: false,
+  isSearchPostsLoading: false,
+  searchedPosts: [],
 };
 
 const postsReducer = createSlice({
@@ -61,17 +59,17 @@ const postsReducer = createSlice({
       state.activeTab = action.payload;
     },
     setCardsList: (state, action: PayloadAction<CardListType>) => {
-      state.cardsList = action.payload.map(card => {
+      state.cardsList = action.payload.map((card) => {
         return {
           ...card,
-          likeStatus: null
+          likeStatus: null,
         };
       });
     },
     setFavouritePost: (state, action: PayloadAction<CardPostType>) => {
       const { id } = action.payload;
       const postIndex = state.favouritePostsList.findIndex(
-        post => post.id === id
+        (post) => post.id === id
       );
       if (postIndex === -1) {
         state.favouritePostsList.push(action.payload);
@@ -79,13 +77,17 @@ const postsReducer = createSlice({
         state.favouritePostsList.splice(postIndex, 1);
       }
     },
+    searchForPosts: (state, action: PayloadAction<string>) => {},
+    setSearchPostsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isSearchPostsLoading = action.payload;
+    },
     setLikeStatus: (
       state,
       action: PayloadAction<{ status: LikeStatus; id: number }>
     ) => {
-      const post = state.cardsList.find(c => c.id === action.payload.id);
+      const post = state.cardsList.find((c) => c.id === action.payload.id);
       const postIndex = state.cardsList.findIndex(
-        c => c.id === action.payload.id
+        (c) => c.id === action.payload.id
       );
       //тут мы просто доп проверяем, нашел ли у нас find в массиве общих постов нужный нам
       if (post && postIndex !== -1) {
@@ -93,18 +95,21 @@ const postsReducer = createSlice({
         if (post.likeStatus === action.payload.status) {
           state.cardsList.splice(postIndex, 1, {
             ...post,
-            likeStatus: null
+            likeStatus: null,
           });
         } else {
           //Иначе дать ему актуальный статус
           state.cardsList.splice(postIndex, 1, {
             ...post,
-            likeStatus: action.payload.status
+            likeStatus: action.payload.status,
           });
         }
       }
-    }
-  }
+    },
+    setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
+      state.searchedPosts = action.payload;
+    },
+  },
 });
 
 export default postsReducer.reducer;
@@ -121,6 +126,8 @@ export const {
   setLikeStatus,
   getSinglePost,
   setSinglePost,
+  searchForPosts,
+  setSearchPostsLoading,
   setSinglePostLoading,
-  
+  setSearchedPosts,
 } = postsReducer.actions;

@@ -8,20 +8,20 @@ import {
   ThumbDownIcon,
   ThumbUpIcon,
   Ellipsis,
-  BookMarksIcon
+  BookMarksIcon,
 } from "../../Assets/Icons";
 import { CardSearchProps } from "./types";
-
-
 
 const CardSearch: FC<CardSearchProps> = ({ post }) => {
   const { image, title, date } = post;
   const { theme } = useThemeContext();
 
   return (
-    <div className={classNames(styles.cardWrapper, {
-      [styles.darkContainer]: theme === Theme.Dark
-    })}>
+    <div
+      className={classNames(styles.cardWrapper, {
+        [styles.darkContainer]: theme === Theme.Dark,
+      })}
+    >
       <div className={classNames(styles.contentWrapper)}>
         <div className={classNames(styles.imgWrapper)}>
           <img src={image} alt="img" />

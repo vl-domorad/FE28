@@ -2,11 +2,11 @@ import { create } from "apisauce";
 import {
   ActivationParams,
   AuthUserPayload,
-  UserActionPayload
-} from "../../Utils/globalTypes";
+  UserActionPayload,
+} from "../../Utils";
 
 const API = create({
-  baseURL: "https://studapi.teachmeskills.by"
+  baseURL: "https://studapi.teachmeskills.by",
 });
 
 const createNewUser = (userData: UserActionPayload) => {
@@ -29,7 +29,6 @@ const authUser = (params: AuthUserPayload) => {
   return API.post("/auth/jwt/create/", params);
 };
 
-
 const getCurrentUser = (token: string) => {
   return API.get(
     "/auth/users/me/",
@@ -46,6 +45,10 @@ const refreshToken = (refresh: string) => {
   return API.post("/auth/jwt/refresh/", { refresh });
 };
 
+const getSearchedPosts = (search: string) => {
+  return API.get("/blog/posts/", { search, limit: 10 });
+};
+
 export default {
   createNewUser,
   getPostsList,
@@ -55,5 +58,5 @@ export default {
   getCurrentUser,
   verifyToken,
   refreshToken,
-  
+  getSearchedPosts,
 };

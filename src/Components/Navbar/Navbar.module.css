@@ -6,7 +6,7 @@
   width: 100%;
   margin-bottom: 72px;
 }
-nav {
+.nav {
   width: 100%;
   background-color: rgb(34, 49, 170);
   position: relative;
@@ -24,6 +24,12 @@ nav {
   color: #ffffff;
 }
 
+.inputContainer {
+  flex: 1;
+  display: flex;
+  margin: 0 15px;
+}
+
 /* Icons */
 .searchIcon {
   display: flex;
@@ -31,16 +37,14 @@ nav {
   align-items: center;
   width: 84px;
   height: 84px;
-  border-right: 1px solid rgb(83, 96, 205);
   border-left: 1px solid rgb(83, 96, 205);
 }
-.searchIcon:hover  {
+.searchIcon:hover {
   cursor: pointer;
   background-color: #f3f3f3;
 }
 .searchIcon:hover svg > path {
   stroke: rgb(83, 96, 205);
-
 }
 
 .userIcon {
@@ -49,7 +53,6 @@ nav {
   align-items: center;
   width: 84px;
   height: 84px;
-
 }
 .userIcon:hover {
   cursor: pointer;
@@ -65,15 +68,14 @@ nav {
   width: 84px;
   height: 84px;
   border-left: 1px solid rgb(83, 96, 205);
-
+  border-right: 1px solid rgb(83, 96, 205);
 }
-.sunMoonIcon:hover  {
+.sunMoonIcon:hover {
   cursor: pointer;
   background-color: #f3f3f3;
 }
 .sunMoonIcon:hover svg > path {
   fill: rgb(83, 96, 205);
-
 }
 .burgerButton {
   padding: 0px 30px;

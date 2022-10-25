@@ -1,9 +1,23 @@
 /* SearcPage Wrapper */
 
-
-.searchPageWrapper{
+.searchPageWrapper {
   margin-bottom: 168px;
+  height: 100%;
 }
-.darkContainer{
+.darkContainer {
   color: white;
+}
+.lottieContainerAnimation {
+  width: 100%;
+  height: 700px;
+}
+
+/* SearchList Title */
+
+.searchListTitle {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 80px;
+  margin-bottom: 65px;
 }

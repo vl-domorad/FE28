@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
-
-
-
 //@ts-ignore
 import styles from "./Menu.module.css";
 
 import User from "../../User/User";
 import { Theme, useThemeContext } from "../../../Context/ThemeContext/Context";
-import { PathNames } from "../../../Pages/Router/Router";
+import { PathNames } from "../../../Pages/Router";
 import { logoutUser } from "../../../Redux/reducers/authReducer";
 import AuthSelectors from "../../../Redux/selectors/authSelectors";
 
@@ -20,7 +17,6 @@ const Menu = () => {
   const { theme } = useThemeContext();
   const location = useLocation();
   const dispatch = useDispatch();
-
 
   const isAuthenticated = useSelector(AuthSelectors.getAuthStatus);
   const currentUser = useSelector(AuthSelectors.getCurrentUser);
@@ -33,24 +29,19 @@ const Menu = () => {
     {
       key: "Home",
       title: "Home",
-      path: PathNames.Home
-    },
-    {
-      key: "Search",
-      title: "Search",
-      path: PathNames.Search
+      path: PathNames.Home,
     },
     {
       key: "Add post",
       title: "Add post",
-      path: PathNames.PostContent
-    }
+      path: PathNames.PostContent,
+    },
   ];
 
   return (
     <ul
       className={classNames(styles.listMenu, {
-        [styles.darkContainer]: theme === Theme.Dark
+        [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
       {isAuthenticated && currentUser && (
@@ -65,7 +56,7 @@ const Menu = () => {
               to={path}
               className={classNames({
                 [styles.activeLink]: location.pathname === path,
-                [styles.inactiveLink]: location.pathname !== path
+                [styles.inactiveLink]: location.pathname !== path,
               })}
             >
               {title}
@@ -74,10 +65,10 @@ const Menu = () => {
         );
       })}
       {isAuthenticated && (
-        <li className={styles.logOut}> 
+        <li className={styles.logOut}>
           <div
             className={classNames({
-              [styles.activeLink]: location.pathname === PathNames.Search
+              [styles.activeLink]: location.pathname === PathNames.Search,
             })}
             onClick={onLogOut}
           >
