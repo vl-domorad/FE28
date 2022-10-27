@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +40,7 @@ const Navbar = ({ onClick, isOpened }: any) => {
 
   const onSearch = () => {
     if (value.length > 0) {
-      dispatch(searchForPosts(value));
+      dispatch(searchForPosts({ search: value, offset: 0, isOverwrite: true }));
       navigate(PathNames.Search, { state: { searchElement: value } });
       setValue("");
       onClick();

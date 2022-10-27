@@ -46,8 +46,8 @@ const refreshToken = (refresh: string) => {
   return API.post("/auth/jwt/refresh/", { refresh });
 };
 
-const getSearchedPosts = (search: string) => {
-  return API.get("/blog/posts/", { search, limit: 10 });
+const getSearchedPosts = (search: string, offset: number) => {
+  return API.get("/blog/posts/", { search, limit: 10, offset });
 };
 
 export default {

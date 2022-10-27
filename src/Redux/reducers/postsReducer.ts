@@ -4,6 +4,8 @@ import {
   CardPostType,
   GetPostsPayload,
   LikeStatus,
+  SearchPostsPayload,
+  SetSearchedPostsPayload,
   TabsNames,
 } from "../../Utils";
 
@@ -20,6 +22,7 @@ type PostStateType = {
   isSearchPostsLoading: boolean;
   searchedPosts: CardListType;
   cardsCount: number;
+  searchedPostsCount: number;
 };
 
 const INITIAL_STATE: PostStateType = {
@@ -35,6 +38,7 @@ const INITIAL_STATE: PostStateType = {
   isSearchPostsLoading: false,
   searchedPosts: [],
   cardsCount: 0,
+  searchedPostsCount: 0,
 };
 
 const postsReducer = createSlice({
@@ -85,10 +89,6 @@ const postsReducer = createSlice({
         state.favouritePostsList.splice(postIndex, 1);
       }
     },
-    searchForPosts: (state, action: PayloadAction<string>) => {},
-    setSearchPostsLoading: (state, action: PayloadAction<boolean>) => {
-      state.isSearchPostsLoading = action.payload;
-    },
     setLikeStatus: (
       state,
       action: PayloadAction<{ status: LikeStatus; id: number }>
@@ -114,12 +114,27 @@ const postsReducer = createSlice({
         }
       }
     },
-    setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
-      state.searchedPosts = action.payload;
+    setSearchPostsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isSearchPostsLoading = action.payload;
+    },
+    setSearchedPosts: (
+      state,
+      action: PayloadAction<SetSearchedPostsPayload>
+    ) => {
+      const { isOverwrite, data } = action.payload;
+      if (isOverwrite) {
+        state.searchedPosts = data;
+      } else {
+        state.searchedPosts.push(...data);
+      }
     },
     setCardsCount: (state, action: PayloadAction<number>) => {
       state.cardsCount = action.payload;
     },
+    setSearchedPostsCount: (state, action: PayloadAction<number>) => {
+      state.searchedPostsCount = action.payload;
+    },
+    searchForPosts: (state, action: PayloadAction<SearchPostsPayload>) => {},
   },
 });
 
@@ -142,4 +157,5 @@ export const {
   setSinglePostLoading,
   setSearchedPosts,
   setCardsCount,
+  setSearchedPostsCount,
 } = postsReducer.actions;

@@ -53,3 +53,13 @@ export type User = {
 export type GetPostsPayload = {
   offset: number;
 };
+
+export type SearchPostsPayload = {
+  search: string;
+  offset: number;
+  isOverwrite: boolean;
+};
+export type SetSearchedPostsPayload = {
+  data: CardListType;
+  isOverwrite: boolean;
+};
