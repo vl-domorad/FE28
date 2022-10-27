@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CardListType, CardPostType, LikeStatus, TabsNames } from "../../Utils";
+import {
+  CardListType,
+  CardPostType,
+  GetPostsPayload,
+  LikeStatus,
+  TabsNames,
+} from "../../Utils";
 
 type PostStateType = {
   selectedPost: CardPostType | null;
@@ -13,6 +19,7 @@ type PostStateType = {
   isPostLoading: boolean;
   isSearchPostsLoading: boolean;
   searchedPosts: CardListType;
+  cardsCount: number;
 };
 
 const INITIAL_STATE: PostStateType = {
@@ -27,13 +34,14 @@ const INITIAL_STATE: PostStateType = {
   isPostLoading: false,
   isSearchPostsLoading: false,
   searchedPosts: [],
+  cardsCount: 0,
 };
 
 const postsReducer = createSlice({
   name: "posts",
   initialState: INITIAL_STATE,
   reducers: {
-    getPosts: (state, action: PayloadAction<undefined>) => {},
+    getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
     getSinglePost: (state, action: PayloadAction<string>) => {},
     setSinglePost: (state, action: PayloadAction<CardPostType>) => {
       state.singlePost = action.payload;
@@ -109,6 +117,9 @@ const postsReducer = createSlice({
     setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
       state.searchedPosts = action.payload;
     },
+    setCardsCount: (state, action: PayloadAction<number>) => {
+      state.cardsCount = action.payload;
+    },
   },
 });
 
@@ -130,4 +141,5 @@ export const {
   setSearchPostsLoading,
   setSinglePostLoading,
   setSearchedPosts,
+  setCardsCount,
 } = postsReducer.actions;

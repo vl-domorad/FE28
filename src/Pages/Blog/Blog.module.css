@@ -1,3 +1,43 @@
-.modalActive{
-    background: rgba(38, 34, 47, 0.5);
+.modalActive {
+  background: rgba(38, 34, 47, 0.5);
+}
+
+.pagesContainer {
+  margin: 0px 24px;
+  display: flex;
+  padding: 0px;
+}
+.pageNumber {
+  list-style-type: none;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #53607a;
+  outline: none;
+}
+.pageNumber:hover {
+  cursor: pointer;
+  background-color: #f0edf6;
+}
+.linkPage {
+  outline: none;
+}
+.linkPage:focus {
+  outline: none;
+}
+.activePageNumber {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgb(101, 85, 168);
+  color: rgb(101, 85, 168);
+}
+.arrowButton {
+  margin: auto;
+  align-items: flex-start;
 }

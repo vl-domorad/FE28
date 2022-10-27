@@ -1,11 +1,11 @@
 export enum TabsNames {
   All = "all",
   Favorites = "favorites",
-  Popular = "popular"
+  Popular = "popular",
 }
 export enum LikeStatus {
   Like = "like",
-  Dislike = "dislike"
+  Dislike = "dislike",
 }
 
 export type CardPostType = {
@@ -28,7 +28,7 @@ export type UserActionPayload = {
 export enum RegistrationStatus {
   Success = "success",
   Failed = "failed",
-  Default = "default"
+  Default = "default",
 }
 
 export type ActivationParams = {
@@ -48,4 +48,8 @@ export type User = {
   username: string;
   id: number;
   email: string;
+};
+
+export type GetPostsPayload = {
+  offset: number;
 };

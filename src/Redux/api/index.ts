@@ -2,6 +2,7 @@ import { create } from "apisauce";
 import {
   ActivationParams,
   AuthUserPayload,
+  PER_PAGE,
   UserActionPayload,
 } from "../../Utils";
 
@@ -13,8 +14,8 @@ const createNewUser = (userData: UserActionPayload) => {
   return API.post("/auth/users/", userData);
 };
 
-const getPostsList = () => {
-  return API.get("/blog/posts/?limit=10");
+const getPostsList = (offset: number) => {
+  return API.get("/blog/posts/", { limit: PER_PAGE, offset });
 };
 
 const activateNewUser = (params: ActivationParams) => {

@@ -3,6 +3,7 @@ import {
   getPosts,
   getSinglePost,
   searchForPosts,
+  setCardsCount,
   setCardsList,
   setSearchedPosts,
   setSearchPostsLoading,
@@ -11,10 +12,13 @@ import {
 } from "../reducers/postsReducer";
 import Api from "../api";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { GetPostsPayload } from "../../Utils";
 
-function* getPostsWorker() {
-  const { data, status, problem } = yield call(Api.getPostsList);
+function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
+  const { offset } = action.payload;
+  const { data, status, problem } = yield call(Api.getPostsList, offset);
   if (status === 200 && data) {
+    yield put(setCardsCount(data.count));
     yield put(setCardsList(data.results));
   } else {
     console.log(problem);
