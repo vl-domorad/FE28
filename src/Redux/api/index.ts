@@ -50,6 +50,10 @@ const getSearchedPosts = (search: string, offset: number) => {
   return API.get("/blog/posts/", { search, limit: 10, offset });
 };
 
+const getMyPostsList = () => {
+  return API.get("/blog/posts/my_posts/");
+};
+
 export default {
   createNewUser,
   getPostsList,
@@ -60,4 +64,5 @@ export default {
   verifyToken,
   refreshToken,
   getSearchedPosts,
+  getMyPostsList,
 };

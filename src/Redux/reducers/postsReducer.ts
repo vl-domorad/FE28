@@ -135,6 +135,7 @@ const postsReducer = createSlice({
       state.searchedPostsCount = action.payload;
     },
     searchForPosts: (state, action: PayloadAction<SearchPostsPayload>) => {},
+    getMyPostsList: (state, action: PayloadAction<undefined>) => {},
   },
 });
 
@@ -158,4 +159,5 @@ export const {
   setSearchedPosts,
   setCardsCount,
   setSearchedPostsCount,
+  getMyPostsList,
 } = postsReducer.actions;

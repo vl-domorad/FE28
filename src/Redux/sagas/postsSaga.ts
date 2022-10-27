@@ -10,10 +10,12 @@ import {
   setSinglePost,
   setSinglePostLoading,
   setSearchedPostsCount,
+  getMyPostsList,
 } from "../reducers/postsReducer";
 import Api from "../api";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GetPostsPayload, SearchPostsPayload } from "../../Utils";
+import callCheckingAuth from "./callCheckingAuth";
 
 function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
   const { offset } = action.payload;
@@ -25,6 +27,18 @@ function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
     console.log(problem);
   }
 }
+
+function* getMyPostsWorker() {
+  const { data, status, problem } = yield callCheckingAuth(Api.getMyPostsList);
+  if (status === 200 && data) {
+    yield put(setCardsList(data.results));
+  } else if (status === 400) {
+    yield put(setCardsList([]));
+  } else {
+    console.log(problem);
+  }
+}
+
 function* getSinglePostWorker(action: PayloadAction<string>) {
   yield put(setSinglePostLoading(true));
   const { data, status, problem } = yield call(Api.getPost, action.payload);
@@ -57,6 +71,7 @@ function* getSearchedPostsWorker(action: PayloadAction<SearchPostsPayload>) {
 export default function* postsSagaWatcher() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
+    takeLatest(getMyPostsList, getMyPostsWorker),
     takeLatest(searchForPosts, getSearchedPostsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
   ]);

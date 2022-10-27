@@ -9,6 +9,7 @@ import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 import AuthSelectors from "../../Redux/selectors/authSelectors";
 import { getUser } from "../../Redux/reducers/authReducer";
+import Blog from "../Blog";
 
 export enum PathNames {
   Home = "/",
@@ -18,7 +19,7 @@ export enum PathNames {
   PostContent = "/posts/:id",
   NewPost = "/add",
   MyPosts = "/my-posts",
-  ActivateUser = "/activate/:uid/:token"
+  ActivateUser = "/activate/:uid/:token",
 }
 
 const Router = () => {
@@ -45,16 +46,16 @@ const Router = () => {
               )
             }
           />
-          {/* <Route
-            path={PathNames.MyPosts}
-            element={
-              !isAuthenticated ? (
-                <Blog isMyPosts />
-              ) : (
-                <Navigate to={PathNames.Home} replace />
-              )
-            }
-          /> */}
+          {/*<Route*/}
+          {/*  path={PathNames.MyPosts}*/}
+          {/*  element={*/}
+          {/*    !isAuthenticated ? (*/}
+          {/*      <Blog isMyPosts />*/}
+          {/*    ) : (*/}
+          {/*      <Navigate to={PathNames.Home} replace />*/}
+          {/*    )*/}
+          {/*  }*/}
+          {/*/>*/}
           <Route path={PathNames.SignUp} element={<SignUp />} />
           <Route path={PathNames.Search} element={<Search />} />
           <Route path={PathNames.NewPost} element={<PostContent />} />
