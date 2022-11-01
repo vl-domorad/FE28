@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-//@ts-ignore
+
 import styles from "./PostContent.module.css";
-import classNames from "classnames";
 import Post from "../../Components/Post";
-import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSinglePost } from "../../Redux/reducers/postsReducer";

@@ -12,6 +12,7 @@ type InputProps = {
   className?: string;
   disabled?: boolean;
   error?: boolean;
+  type?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -22,14 +23,27 @@ const Input: FC<InputProps> = ({
   error,
   className,
   onBlur,
+  type = "text",
 }) => {
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     onChange(evt.target.value);
   };
-  return (
+  const onTextAreaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(evt.target.value);
+  };
+  return type !== "textarea" ? (
     <input
-      type="text"
+      type={type}
       onChange={onInputChange}
+      value={value}
+      onBlur={onBlur}
+      placeholder={placeholder}
+      className={classNames(styles.input, className, { [styles.error]: error })}
+      disabled={disabled}
+    />
+  ) : (
+    <textarea
+      onChange={onTextAreaChange}
       value={value}
       onBlur={onBlur}
       placeholder={placeholder}

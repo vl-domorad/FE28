@@ -1,0 +1,45 @@
+.smallInputsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1120px;
+  gap: 40px 32px;
+}
+
+.inputContainer {
+  flex: 1;
+  min-width: 544px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.footerContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 48px;
+}
+.saveContainer {
+  display: flex;
+  gap: 24px;
+}
+.button {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  max-height: 52px;
+}
+.container {
+  margin-bottom: 72px;
+}
+.deleteFooterContainer {
+  justify-content: space-between;
+}
+.image {
+  flex: 1;
+  height: 100px;
+  width: 200px;
+}

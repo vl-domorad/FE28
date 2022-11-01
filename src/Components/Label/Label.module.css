@@ -6,6 +6,11 @@
   line-height: 20px;
   color: rgba(49, 48, 55, 1);
 }
+.required::before {
+  content: '*';
+  color: red;
+  margin-right: 4px;
+}
 .darkContainer.label {
   color: white;
 }

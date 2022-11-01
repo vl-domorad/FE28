@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import ActivateUser from "../ActivateUser";
 import PagesWrapper from "../PagesWrapper";
 import PostContent from "../PostContent";
@@ -9,7 +10,7 @@ import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 import AuthSelectors from "../../Redux/selectors/authSelectors";
 import { getUser } from "../../Redux/reducers/authReducer";
-import Blog from "../Blog";
+import AddNewPost from "../AddNewPost";
 
 export enum PathNames {
   Home = "/",
@@ -46,19 +47,9 @@ const Router = () => {
               )
             }
           />
-          {/*<Route*/}
-          {/*  path={PathNames.MyPosts}*/}
-          {/*  element={*/}
-          {/*    !isAuthenticated ? (*/}
-          {/*      <Blog isMyPosts />*/}
-          {/*    ) : (*/}
-          {/*      <Navigate to={PathNames.Home} replace />*/}
-          {/*    )*/}
-          {/*  }*/}
-          {/*/>*/}
           <Route path={PathNames.SignUp} element={<SignUp />} />
           <Route path={PathNames.Search} element={<Search />} />
-          <Route path={PathNames.NewPost} element={<PostContent />} />
+          <Route path={PathNames.NewPost} element={<AddNewPost />} />
           <Route path={PathNames.PostContent} element={<PostContent />} />
           <Route path={PathNames.ActivateUser} element={<ActivateUser />} />
         </Route>

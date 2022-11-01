@@ -1,6 +1,6 @@
 .primary {
   background: rgba(34, 49, 170, 1);
-  padding:32px 16px;
+  padding: 16px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,6 @@
   font-size: 18px;
   font-weight: 600;
   border: none;
-
 }
 
 .primary:hover {
@@ -17,60 +16,51 @@
 }
 .primary:disabled {
   background: rgba(232, 232, 232, 1);
-  color: rgba(141, 142, 151, 1)  ;
+  color: rgba(141, 142, 151, 1);
   border: 1px solid rgba(255, 255, 255, 0.568);
   opacity: 0.7;
   cursor: default;
 }
 .secondary {
   background: rgba(232, 232, 232, 1);
-  padding:32px 16px;
-  width: 132px;
-  height: 56px;
+  padding: 16px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(49, 48, 55, 1)rgba(232, 232, 232, 1);
+  color: rgba(49, 48, 55, 1);
   font-size: 18px;
   border: none;
   font-weight: 600;
-  margin: 10px;
 }
 .secondary:hover {
-  background:rgba(218, 218, 218, 1);
+  background: rgba(218, 218, 218, 1);
   cursor: pointer;
 }
 .secondary:disabled {
   background: rgba(232, 232, 232, 1);
-  color:rgba(141, 142, 151, 1);
+  color: rgba(141, 142, 151, 1);
   border: 1px solid rgba(255, 255, 255, 0.568);
   opacity: 0.7;
   cursor: default;
 }
 .error {
-  background:transparent;
-  padding:32px 16px;
+  background: transparent;
+  padding: 16px 32px;
   border: none;
-  width: 132px;
-  height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgba(253, 52, 25, 1);
   font-size: 20px;
   font-weight: 600;
-  margin: 10px;
 }
 .error:hover {
   border: 1px solid rgba(218, 218, 218, 1);
   cursor: pointer;
 }
 .error:disabled {
-  color:rgba(141, 142, 151, 1) ;
+  color: rgba(141, 142, 151, 1);
   border: 1px solid rgba(255, 255, 255, 0.568);
   opacity: 0.7;
   cursor: default;
-}
-.ButtonSignUp{
-    width: 544px;
 }
