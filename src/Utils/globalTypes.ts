@@ -53,6 +53,7 @@ export type User = {
 
 export type GetPostsPayload = {
   offset: number;
+  ordering: string;
 };
 
 export type SearchPostsPayload = {
@@ -64,3 +65,8 @@ export type SetSearchedPostsPayload = {
   data: CardListType;
   isOverwrite: boolean;
 };
+
+export enum SortOrder {
+  Date = "date",
+  Title = "title",
+}

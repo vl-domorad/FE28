@@ -14,8 +14,8 @@ const createNewUser = (userData: UserActionPayload) => {
   return API.post("/auth/users/", userData);
 };
 
-const getPostsList = (offset: number) => {
-  return API.get("/blog/posts/", { limit: PER_PAGE, offset });
+const getPostsList = (offset: number, ordering: string) => {
+  return API.get("/blog/posts/", { limit: PER_PAGE, offset, ordering });
 };
 
 const activateNewUser = (params: ActivationParams) => {

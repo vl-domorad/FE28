@@ -10,11 +10,30 @@ import {
   Ellipsis,
   BookMarksIcon,
 } from "../../Assets/Icons";
-import { CardSearchProps } from "./types";
+import { useDispatch } from "react-redux";
+import {
+  setFavouritePost,
+  setLikeStatus,
+} from "../../Redux/reducers/postsReducer";
+import { CardPostType, LikeStatus } from "../../Utils";
+
+export type CardSearchProps = {
+  post: CardPostType;
+};
 
 const CardSearch: FC<CardSearchProps> = ({ post }) => {
-  const { image, title, date } = post;
+  const { image, title, date, id, likeStatus } = post;
   const { theme } = useThemeContext();
+  const dispatch = useDispatch();
+
+  const onAddFavourite = (event: any) => {
+    event.stopPropagation();
+    dispatch(setFavouritePost(post));
+  };
+
+  const onStatusClick = (status: LikeStatus) => {
+    dispatch(setLikeStatus({ status, id }));
+  };
 
   return (
     <div
@@ -33,11 +52,18 @@ const CardSearch: FC<CardSearchProps> = ({ post }) => {
       </div>
       <div className={classNames(styles.iconsWrapper)}>
         <div className={styles.iconsThumb}>
-          <ThumbUpIcon />
-          <ThumbDownIcon />
+          <div onClick={() => onStatusClick(LikeStatus.Like)}>
+            <ThumbUpIcon /> {likeStatus === LikeStatus.Like && "1"}
+          </div>
+          <div onClick={() => onStatusClick(LikeStatus.Dislike)}>
+            <ThumbDownIcon />
+            {likeStatus === LikeStatus.Dislike && "1"}
+          </div>
         </div>
         <div className={styles.iconsOptions}>
-          <BookMarksIcon />
+          <div onClick={onAddFavourite}>
+            <BookMarksIcon />
+          </div>
           <Ellipsis />
         </div>
       </div>

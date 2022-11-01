@@ -7,7 +7,7 @@ import {
   BookMarksIcon,
   Ellipsis,
   ThumbDownIcon,
-  ThumbUpIcon
+  ThumbUpIcon,
 } from "../../Assets/Icons";
 import { CardPostProps } from "./types";
 import { Theme, useThemeContext } from "../../Context/ThemeContext/Context";
@@ -19,9 +19,8 @@ import {
   setSelectedImgPost,
   setSingleImgModalVisible,
   setSinglePostModalVisible,
-
 } from "../../Redux/reducers/postsReducer";
-import { CardListType, LikeStatus } from "../../Utils/globalTypes";
+import { CardListType, LikeStatus } from "../../Utils";
 import PostsSelectors from "../../Redux/selectors/postsSelectors";
 import { useNavigate } from "react-router-dom";
 
@@ -30,15 +29,15 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
   const { theme } = useThemeContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
   const favouritePostsList: CardListType = useSelector(
     PostsSelectors.getFavoritePosts
   );
 
-  const currentPostIndex = favouritePostsList.findIndex(post => post.id === id);
+  const currentPostIndex = favouritePostsList.findIndex(
+    (post) => post.id === id
+  );
   const isFavorite = currentPostIndex !== -1;
-
 
   const onNavigateToPost = () => {
     navigate(`/posts/${id}`);
@@ -56,18 +55,13 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
     event.stopPropagation();
     dispatch(setSelectedPost(post));
     dispatch(setSinglePostModalVisible(true));
-    
-
   };
-  
-  const onOpenImgModal=(event:any)=>{
+
+  const onOpenImgModal = (event: any) => {
     event.stopPropagation();
     dispatch(setSelectedImgPost(post));
     dispatch(setSingleImgModalVisible(true));
-
-  }
-
-
+  };
 
   return (
     <>
@@ -76,7 +70,7 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
           [styles.largePost]: size === CardSize.Large,
           [styles.mediumPost]: size === CardSize.Medium,
           [styles.smallPost]: size === CardSize.Small,
-          [styles.darkContainer]: theme === Theme.Dark
+          [styles.darkContainer]: theme === Theme.Dark,
         })}
         onClick={onNavigateToPost}
       >
@@ -99,7 +93,7 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
             <div
               onClick={() => onStatusClick(LikeStatus.Like)}
               className={classNames(styles.likeStatusButton, {
-                [styles.like]: likeStatus === LikeStatus.Like
+                [styles.like]: likeStatus === LikeStatus.Like,
               })}
             >
               <ThumbUpIcon /> {likeStatus === LikeStatus.Like && 1}
@@ -107,7 +101,7 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
             <div
               onClick={() => onStatusClick(LikeStatus.Dislike)}
               className={classNames(styles.likeStatusButton, {
-                [styles.dislike]: likeStatus === LikeStatus.Dislike
+                [styles.dislike]: likeStatus === LikeStatus.Dislike,
               })}
             >
               <ThumbDownIcon /> {likeStatus === LikeStatus.Dislike && 1}
@@ -130,4 +124,3 @@ const CardPost: FC<CardPostProps> = ({ post, size }) => {
   );
 };
 export default CardPost;
-

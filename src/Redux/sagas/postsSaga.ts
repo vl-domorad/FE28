@@ -18,8 +18,12 @@ import { GetPostsPayload, SearchPostsPayload } from "../../Utils";
 import callCheckingAuth from "./callCheckingAuth";
 
 function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
-  const { offset } = action.payload;
-  const { data, status, problem } = yield call(Api.getPostsList, offset);
+  const { offset, ordering } = action.payload;
+  const { data, status, problem } = yield call(
+    Api.getPostsList,
+    offset,
+    ordering
+  );
   if (status === 200 && data) {
     yield put(setCardsCount(data.count));
     yield put(setCardsList(data.results));
