@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import classNames from "classnames";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { useDispatch } from "react-redux";
@@ -10,9 +10,20 @@ import styles from "./AddNewPost.module.css";
 import Label from "../../Components/Label";
 import Button, { ButtonType } from "../../Components/Button";
 import { PathNames } from "../Router";
-import { addNewPost } from "../../Redux/reducers/postsReducer";
+import { addNewPost, saveEditedPost } from "../../Redux/reducers/postsReducer";
+import { CardPostType } from "../../Utils";
+
+type PostLocationState = {
+  post: CardPostType;
+};
 
 const AddNewPost = () => {
+  const location = useLocation();
+  const { post } = location.state as PostLocationState;
+  const { id } = useParams();
+
+  const isEdit = !!post;
+
   const [title, setTitle] = useState("");
   const [lessonNum, setLessonNum] = useState("");
   const [description, setDescription] = useState("");
@@ -22,12 +33,22 @@ const AddNewPost = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setImages([{ dataURL: post.image }]);
+      setDescription(post.text);
+      setLessonNum(post.lesson_num.toString());
+    }
+  }, [post?.id]);
+
   const isValid = useMemo(() => {
     return (
       title.length > 0 &&
       lessonNum.length > 0 &&
       description.length > 0 &&
-      images.length > 0
+      images.length > 0 &&
+      !!images[0].file
     );
   }, [title, lessonNum, description, images]);
 
@@ -43,6 +64,8 @@ const AddNewPost = () => {
     navigate(PathNames.Home);
   };
 
+  const handleHomeNavigate = () => navigate(PathNames.Home);
+
   const onSave = () => {
     const formData = new FormData();
     formData.append("image", images[0].file as Blob);
@@ -50,9 +73,19 @@ const AddNewPost = () => {
     formData.append("title", title);
     formData.append("lesson_num", lessonNum);
 
-    dispatch(
-      addNewPost({ formData, callback: () => navigate(PathNames.Home) })
-    );
+    dispatch(addNewPost({ formData, callback: handleHomeNavigate }));
+  };
+
+  const onSaveEdit = () => {
+    if (post && id) {
+      const formData = new FormData();
+      formData.append("image", images[0].file as Blob);
+      formData.append("text", description);
+      formData.append("title", title);
+      formData.append("lesson_num", lessonNum);
+      formData.append("author", post.author.toString());
+      dispatch(saveEditedPost({ id, formData, callback: handleHomeNavigate }));
+    }
   };
 
   return (
@@ -121,10 +154,10 @@ const AddNewPost = () => {
       </div>
       <div
         className={classNames(styles.footerContainer, {
-          [styles.deleteFooterContainer]: false,
+          [styles.deleteFooterContainer]: isEdit,
         })}
       >
-        {false && (
+        {isEdit && (
           <Button
             type={ButtonType.Error}
             title={"Delete post"}
@@ -139,8 +172,8 @@ const AddNewPost = () => {
           />
           <Button
             type={ButtonType.Primary}
-            title={"Add post"}
-            onClick={onSave}
+            title={isEdit ? "Save" : "Add post"}
+            onClick={isEdit ? onSaveEdit : onSave}
             disabled={!isValid}
           />
         </div>

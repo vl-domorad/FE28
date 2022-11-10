@@ -71,6 +71,15 @@ const addNewPost = (token: string, data: any) => {
   });
 };
 
+const saveEditedPost = (token: string, id: string, data: any) => {
+  return API.put(`/blog/posts/${id}/`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export default {
   createNewUser,
   getPostsList,
@@ -83,4 +92,5 @@ export default {
   getSearchedPosts,
   getMyPostsList,
   addNewPost,
+  saveEditedPost,
 };

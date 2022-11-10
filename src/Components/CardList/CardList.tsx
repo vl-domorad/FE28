@@ -1,12 +1,11 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-//@ts-ignore
 import styles from "./CardList.module.css";
 
 import CardPost from "../CardPost";
 
 import { useThemeContext, Theme } from "../../Context/ThemeContext/Context";
-import { CardListType } from "../../Utils/globalTypes";
+import { CardListType } from "../../Utils";
 
 export enum CardSize {
   Large = "large",
@@ -16,16 +15,11 @@ export enum CardSize {
 
 type CardListProps = {
   cardList: CardListType;
+  isMyPosts: boolean;
 };
 
-const CardList: FC<CardListProps> = ({ cardList }) => {
+const CardList: FC<CardListProps> = ({ cardList, isMyPosts }) => {
   const { theme } = useThemeContext();
-
-  // const [cardList, setCardList] = useState<CardList | null>([])
-  //
-  // useEffect(()=>{
-  //   setCardList(POST_MOCK)
-  // }, [])
 
   return cardList && cardList.length > 0 ? (
     <div
@@ -35,14 +29,23 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
     >
       <div className={styles.leftSideList}>
         <div className={styles.largeCardListWrapper}>
-          <CardPost post={cardList[0]} size={CardSize.Large} />
+          <CardPost
+            post={cardList[0]}
+            size={CardSize.Large}
+            isMyPosts={isMyPosts}
+          />
         </div>
 
         <div className={styles.mediumCardListWrapper}>
           {cardList.map((post, id) => {
             if (id >= 1 && id <= 4) {
               return (
-                <CardPost post={post} key={post.id} size={CardSize.Medium} />
+                <CardPost
+                  post={post}
+                  key={post.id}
+                  size={CardSize.Medium}
+                  isMyPosts={isMyPosts}
+                />
               );
             }
           })}
@@ -51,7 +54,14 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
       <div className={styles.rightSideList}>
         {cardList.map((post, id) => {
           if (id >= 5) {
-            return <CardPost post={post} key={post.id} size={CardSize.Small} />;
+            return (
+              <CardPost
+                post={post}
+                key={post.id}
+                size={CardSize.Small}
+                isMyPosts={isMyPosts}
+              />
+            );
           }
         })}
       </div>

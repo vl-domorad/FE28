@@ -71,4 +71,11 @@ export enum SortOrder {
   Title = "title",
 }
 
-export type AddNewPostPayload = { formData: any; callback: () => void };
+export interface ISavePostPayload {
+  formData: any;
+  callback: () => void;
+}
+
+export interface ISaveEditedPostPayload extends ISavePostPayload {
+  id: string;
+}

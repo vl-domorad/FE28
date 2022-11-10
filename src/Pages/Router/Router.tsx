@@ -18,6 +18,7 @@ export enum PathNames {
   SignUp = "/sign-up",
   Search = "/search",
   PostContent = "/posts/:id",
+  EditPost = "/posts/:id/edit",
   NewPost = "/add",
   MyPosts = "/my-posts",
   ActivateUser = "/activate/:uid/:token",
@@ -50,6 +51,7 @@ const Router = () => {
           <Route path={PathNames.SignUp} element={<SignUp />} />
           <Route path={PathNames.Search} element={<Search />} />
           <Route path={PathNames.NewPost} element={<AddNewPost />} />
+          <Route path={PathNames.EditPost} element={<AddNewPost />} />
           <Route path={PathNames.PostContent} element={<PostContent />} />
           <Route path={PathNames.ActivateUser} element={<ActivateUser />} />
         </Route>

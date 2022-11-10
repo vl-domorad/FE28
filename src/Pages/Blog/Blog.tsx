@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 
@@ -90,7 +90,7 @@ const Blog = () => {
         <option value={SortOrder.Date}>Date</option>
       </select>
       <Tabs tabs={tabs} onClick={onTabClick} activeTab={activeTab} />
-      <CardList cardList={cardsList} />
+      <CardList cardList={cardsList} isMyPosts={isMyPosts} />
       {!isMyPosts && (
         <ReactPaginate
           pageCount={pagesCount}

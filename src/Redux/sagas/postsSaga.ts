@@ -12,13 +12,15 @@ import {
   setSearchedPostsCount,
   getMyPostsList,
   addNewPost,
+  saveEditedPost,
 } from "../reducers/postsReducer";
 import Api from "../api";
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  AddNewPostPayload,
+  ISavePostPayload,
   GetPostsPayload,
   SearchPostsPayload,
+  ISaveEditedPostPayload,
 } from "../../Utils";
 import callCheckingAuth from "./callCheckingAuth";
 
@@ -77,11 +79,26 @@ function* getSearchedPostsWorker(action: PayloadAction<SearchPostsPayload>) {
   yield put(setSearchPostsLoading(false));
 }
 
-function* addNewPostWorker(action: PayloadAction<AddNewPostPayload>) {
+function* addNewPostWorker(action: PayloadAction<ISavePostPayload>) {
   const { formData, callback } = action.payload;
   const { status, problem } = yield callCheckingAuth(Api.addNewPost, formData);
 
   if (status === 201) {
+    callback();
+  } else {
+    console.log("problem", problem);
+  }
+}
+
+function* editPostWorker(action: PayloadAction<ISaveEditedPostPayload>) {
+  const { id, formData, callback } = action.payload;
+  const { status, problem } = yield callCheckingAuth(
+    Api.saveEditedPost,
+    id,
+    formData
+  );
+
+  if (status === 200) {
     callback();
   } else {
     console.log("problem", problem);
@@ -95,5 +112,6 @@ export default function* postsSagaWatcher() {
     takeLatest(searchForPosts, getSearchedPostsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(addNewPost, addNewPostWorker),
+    takeLatest(saveEditedPost, editPostWorker),
   ]);
 }

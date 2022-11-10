@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  AddNewPostPayload,
   CardListType,
   CardPostType,
   GetPostsPayload,
@@ -8,6 +7,8 @@ import {
   SearchPostsPayload,
   SetSearchedPostsPayload,
   TabsNames,
+  ISaveEditedPostPayload,
+  ISavePostPayload,
 } from "../../Utils";
 
 type PostStateType = {
@@ -137,7 +138,11 @@ const postsReducer = createSlice({
     },
     searchForPosts: (state, action: PayloadAction<SearchPostsPayload>) => {},
     getMyPostsList: (state, action: PayloadAction<undefined>) => {},
-    addNewPost: (state, action: PayloadAction<AddNewPostPayload>) => {},
+    addNewPost: (state, action: PayloadAction<ISavePostPayload>) => {},
+    saveEditedPost: (
+      state,
+      action: PayloadAction<ISaveEditedPostPayload>
+    ) => {},
   },
 });
 
@@ -163,4 +168,5 @@ export const {
   setSearchedPostsCount,
   getMyPostsList,
   addNewPost,
+  saveEditedPost,
 } = postsReducer.actions;

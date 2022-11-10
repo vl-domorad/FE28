@@ -210,3 +210,17 @@
 .favouritePost svg path {
   fill: #a1a100;
 }
+.popupContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+.popupContainer div {
+  font-size: 14px;
+  font-weight: bold;
+}
+.popupContainer div:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
