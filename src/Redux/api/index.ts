@@ -80,6 +80,18 @@ const saveEditedPost = (token: string, id: string, data: any) => {
   });
 };
 
+const deletePost = (token: string, id: string) => {
+  return API.delete(
+    `/blog/posts/${id}/`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
 export default {
   createNewUser,
   getPostsList,
@@ -93,4 +105,5 @@ export default {
   getMyPostsList,
   addNewPost,
   saveEditedPost,
+  deletePost,
 };

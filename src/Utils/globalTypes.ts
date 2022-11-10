@@ -79,3 +79,8 @@ export interface ISavePostPayload {
 export interface ISaveEditedPostPayload extends ISavePostPayload {
   id: string;
 }
+
+export type DeletePostPayload = {
+  id: string;
+  callback: () => void;
+};

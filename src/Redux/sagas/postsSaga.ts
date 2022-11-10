@@ -13,6 +13,7 @@ import {
   getMyPostsList,
   addNewPost,
   saveEditedPost,
+  deletePost,
 } from "../reducers/postsReducer";
 import Api from "../api";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -21,6 +22,7 @@ import {
   GetPostsPayload,
   SearchPostsPayload,
   ISaveEditedPostPayload,
+  DeletePostPayload,
 } from "../../Utils";
 import callCheckingAuth from "./callCheckingAuth";
 
@@ -105,6 +107,17 @@ function* editPostWorker(action: PayloadAction<ISaveEditedPostPayload>) {
   }
 }
 
+function* deletePostWorker(action: PayloadAction<DeletePostPayload>) {
+  const { id, callback } = action.payload;
+  const { status, problem } = yield callCheckingAuth(Api.deletePost, id);
+
+  if (status === 204) {
+    callback();
+  } else {
+    console.log("problem", problem);
+  }
+}
+
 export default function* postsSagaWatcher() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
@@ -113,5 +126,6 @@ export default function* postsSagaWatcher() {
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(addNewPost, addNewPostWorker),
     takeLatest(saveEditedPost, editPostWorker),
+    takeLatest(deletePost, deletePostWorker),
   ]);
 }

@@ -9,6 +9,7 @@ import {
   TabsNames,
   ISaveEditedPostPayload,
   ISavePostPayload,
+  DeletePostPayload,
 } from "../../Utils";
 
 type PostStateType = {
@@ -143,6 +144,7 @@ const postsReducer = createSlice({
       state,
       action: PayloadAction<ISaveEditedPostPayload>
     ) => {},
+    deletePost: (state, action: PayloadAction<DeletePostPayload>) => {},
   },
 });
 
@@ -169,4 +171,5 @@ export const {
   getMyPostsList,
   addNewPost,
   saveEditedPost,
+  deletePost,
 } = postsReducer.actions;

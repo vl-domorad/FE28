@@ -10,7 +10,11 @@ import styles from "./AddNewPost.module.css";
 import Label from "../../Components/Label";
 import Button, { ButtonType } from "../../Components/Button";
 import { PathNames } from "../Router";
-import { addNewPost, saveEditedPost } from "../../Redux/reducers/postsReducer";
+import {
+  addNewPost,
+  deletePost,
+  saveEditedPost,
+} from "../../Redux/reducers/postsReducer";
 import { CardPostType } from "../../Utils";
 
 type PostLocationState = {
@@ -88,6 +92,12 @@ const AddNewPost = () => {
     }
   };
 
+  const onDeletePost = () => {
+    if (id) {
+      dispatch(deletePost({ id, callback: handleHomeNavigate }));
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Title title={"Add New Post"} />
@@ -162,6 +172,7 @@ const AddNewPost = () => {
             type={ButtonType.Error}
             title={"Delete post"}
             className={styles.button}
+            onClick={onDeletePost}
           />
         )}
         <div className={styles.saveContainer}>
