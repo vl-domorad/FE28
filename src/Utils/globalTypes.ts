@@ -70,3 +70,5 @@ export enum SortOrder {
   Date = "date",
   Title = "title",
 }
+
+export type AddNewPostPayload = { formData: any; callback: () => void };

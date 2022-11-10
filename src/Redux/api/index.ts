@@ -50,8 +50,25 @@ const getSearchedPosts = (search: string, offset: number) => {
   return API.get("/blog/posts/", { search, limit: 10, offset });
 };
 
-const getMyPostsList = () => {
-  return API.get("/blog/posts/my_posts/");
+const getMyPostsList = (token: string) => {
+  return API.get(
+    "/blog/posts/my_posts/",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+const addNewPost = (token: string, data: any) => {
+  return API.post("/blog/posts/", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export default {
@@ -65,4 +82,5 @@ export default {
   refreshToken,
   getSearchedPosts,
   getMyPostsList,
+  addNewPost,
 };

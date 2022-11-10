@@ -1,20 +1,24 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import { useDispatch } from "react-redux";
 
 import Title from "../../Components/Title";
 import Input from "../../Components/Input";
 import styles from "./AddNewPost.module.css";
 import Label from "../../Components/Label";
 import Button, { ButtonType } from "../../Components/Button";
-import ImageUploading, { ImageListType } from "react-images-uploading";
 import { PathNames } from "../Router";
+import { addNewPost } from "../../Redux/reducers/postsReducer";
 
 const AddNewPost = () => {
   const [title, setTitle] = useState("");
   const [lessonNum, setLessonNum] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState<ImageListType>([]);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -37,6 +41,18 @@ const AddNewPost = () => {
     setDescription("");
     setImages([]);
     navigate(PathNames.Home);
+  };
+
+  const onSave = () => {
+    const formData = new FormData();
+    formData.append("image", images[0].file as Blob);
+    formData.append("text", description);
+    formData.append("title", title);
+    formData.append("lesson_num", lessonNum);
+
+    dispatch(
+      addNewPost({ formData, callback: () => navigate(PathNames.Home) })
+    );
   };
 
   return (
@@ -124,6 +140,7 @@ const AddNewPost = () => {
           <Button
             type={ButtonType.Primary}
             title={"Add post"}
+            onClick={onSave}
             disabled={!isValid}
           />
         </div>
