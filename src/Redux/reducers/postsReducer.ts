@@ -12,7 +12,7 @@ import {
   DeletePostPayload,
 } from "../../Utils";
 
-type PostStateType = {
+export type PostStateType = {
   selectedPost: CardPostType | null;
   selectedImgPost: CardPostType | null;
   singlePostModalVisible: boolean;

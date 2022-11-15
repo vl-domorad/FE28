@@ -1,6 +1,6 @@
-export default {
-  getCurrentUser: (state: any) => state.authReducer.user,
-  getAuthStatus: (state: any) => state.authReducer.authStatus,
-  getCurrentUserData: (state: any) => state.authReducer.user,
+import { RootState } from "../store";
 
+export default {
+  getCurrentUser: (state: RootState) => state.authReducer.user,
+  getAuthStatus: (state: RootState) => state.authReducer.authStatus,
 };

@@ -1,5 +1,5 @@
-// export const getTheme = (state: any) => state.themeReducer.theme
+import { RootState } from "../store";
 
 export default {
-  getTheme: (state: any) => state.themeReducer.theme,
+  getTheme: (state: RootState) => state.themeReducer.theme,
 };
